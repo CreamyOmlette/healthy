@@ -1,0 +1,96 @@
+$primary-color : #f87878;
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+.navbar{
+    background-color: black;
+    color: #edf1f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .logo{
+        font-size: 20px;
+        span{
+            font-size: 20px;
+            color: $primary-color;
+            padding-left: 1em;
+        }
+    }
+    a{
+        text-decoration: none;
+    }
+    ul{
+        list-style: none;
+        li{
+            display: inline-block;
+            padding: 0px 1em;
+            button{
+                border-radius: 2em;
+                border-color: $primary-color; 
+                border: none;
+                padding: 5px 1em;
+                background-color:#edf1f1;
+                color: black;
+                &:hover{
+                    background-color: $primary-color;
+                }
+                
+            }
+            &:hover{
+                color: $primary-color;    
+            }
+        }
+    }
+    padding: 20px 5px;
+}
+.tab-container{
+    position: relative;
+    img{
+        position: absolute;
+        width: 100vw;
+        z-index: -1;
+        height: 80vh;
+        object-fit: cover;
+    }
+    .tab-description{
+        position: relative;
+        background-color: black;
+        color: #edf1f1;
+        left:0.5em;
+        top: 11em;
+        font-size: 30px;
+        width: 16em;
+        padding: 1em;
+        height: 15em;
+    }
+    .tabheader{
+        position: absolute; 
+        justify-content: space-between; 
+        padding: 2em;
+        top: 6em;   
+        right: 0px;
+        width: 200px;
+        background-color: #edf1f1;
+        .tabheader-items{
+            padding: 1em;
+            font-size: 20px;
+        }
+    }
+    .items-wrapper{
+        border-left: black solid;
+        .active{
+            font-weight: 700;
+        }
+    }
+    .show{
+        display: block;
+    }
+    .hide{
+        display: none;
+    }
+}

@@ -1,0 +1,219 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/alexlipceanu/Projects/RiderProjects/Redesign/Redesign/Redesign.csproj": {}
+  },
+  "projects": {
+    "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.Core/HealthBuilder.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.Core/HealthBuilder.Core.csproj",
+        "projectName": "HealthBuilder.Core",
+        "projectPath": "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.Core/HealthBuilder.Core.csproj",
+        "packagesPath": "/Users/alexlipceanu/.nuget/packages/",
+        "outputPath": "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.Core/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/alexlipceanu/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.201/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.DataAccess/HealthBuilder.DataAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.DataAccess/HealthBuilder.DataAccess.csproj",
+        "projectName": "HealthBuilder.DataAccess",
+        "projectPath": "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.DataAccess/HealthBuilder.DataAccess.csproj",
+        "packagesPath": "/Users/alexlipceanu/.nuget/packages/",
+        "outputPath": "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.DataAccess/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/alexlipceanu/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.Core/HealthBuilder.Core.csproj": {
+                "projectPath": "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.Core/HealthBuilder.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.0-preview.3.21201.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.0-preview.3.21201.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.0-preview.3.21201.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.201/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/alexlipceanu/Projects/RiderProjects/Redesign/Redesign/Redesign.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/alexlipceanu/Projects/RiderProjects/Redesign/Redesign/Redesign.csproj",
+        "projectName": "Redesign",
+        "projectPath": "/Users/alexlipceanu/Projects/RiderProjects/Redesign/Redesign/Redesign.csproj",
+        "packagesPath": "/Users/alexlipceanu/.nuget/packages/",
+        "outputPath": "/Users/alexlipceanu/Projects/RiderProjects/Redesign/Redesign/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/alexlipceanu/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.DataAccess/HealthBuilder.DataAccess.csproj": {
+                "projectPath": "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.DataAccess/HealthBuilder.DataAccess.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[10.1.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.0-preview.3.21201.2, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools.DotNet": {
+              "target": "Package",
+              "version": "[2.0.3, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.6.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.201/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
