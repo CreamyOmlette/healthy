@@ -15,7 +15,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\HealthBuilder.Core\HealthBuilder.Core.csproj" />
+      <ProjectReference Include="..\HealthBuilder.Domain\HealthBuilder.Domain.csproj" />
+      <ProjectReference Include="..\HealthBuilder.Repositories\HealthBuilder.Repositories.csproj" />
     </ItemGroup>
 
     <ItemGroup>

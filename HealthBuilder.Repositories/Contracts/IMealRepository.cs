@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using HealthBuilder.Core.Entities;
 
-namespace HealthBuilder.Core.Repositories
+namespace HealthBuilder.Repositories
 {
     public interface IScheduledMealRepository : IRepository<ScheduledMeal>
     {

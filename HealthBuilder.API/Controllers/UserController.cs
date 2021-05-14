@@ -4,10 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using HealthBuilder.Core.Entities;
-using HealthBuilder.Core.Repositories;
-using Microsoft.AspNetCore.Identity;
+using HealthBuilder.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 
 namespace HealthBuilder.API.Controllers
 {
@@ -15,8 +13,8 @@ namespace HealthBuilder.API.Controllers
     [Route("api/users")]
     public class UserController : ControllerBase
     {
-        private IRepository<User> _userRepository;
-        private IMapper _mapper;
+        private readonly IRepository<User> _userRepository;
+        private readonly IMapper _mapper;
 
         public UserController(IRepository<User> userRepository, IMapper mapper)
         {

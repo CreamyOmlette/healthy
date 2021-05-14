@@ -1366,18 +1366,11 @@
           "System.Xml.ReaderWriter": "4.3.0"
         }
       },
-      "HealthBuilder.Core/1.0.0": {
-        "runtime": {
-          "HealthBuilder.Core.dll": {}
-        },
-        "compile": {
-          "HealthBuilder.Core.dll": {}
-        }
-      },
       "HealthBuilder.DataAccess/1.0.0": {
         "dependencies": {
           "AutoMapper": "10.1.1",
-          "HealthBuilder.Core": "1.0.0",
+          "HealthBuilder.Domain": "1.0.0",
+          "HealthBuilder.Repositories": "1.0.0",
           "Microsoft.EntityFrameworkCore": "6.0.0-preview.3.21201.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.0-preview.3.21201.2"
         },
@@ -1386,6 +1379,26 @@
         },
         "compile": {
           "HealthBuilder.DataAccess.dll": {}
+        }
+      },
+      "HealthBuilder.Domain/1.0.0": {
+        "runtime": {
+          "HealthBuilder.Domain.dll": {}
+        },
+        "compile": {
+          "HealthBuilder.Domain.dll": {}
+        }
+      },
+      "HealthBuilder.Repositories/1.0.0": {
+        "dependencies": {
+          "HealthBuilder.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "6.0.0-preview.3.21201.2"
+        },
+        "runtime": {
+          "HealthBuilder.Repositories.dll": {}
+        },
+        "compile": {
+          "HealthBuilder.Repositories.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/5.0.0.0": {
@@ -3716,12 +3729,17 @@
       "path": "system.xml.xmldocument/4.3.0",
       "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
     },
-    "HealthBuilder.Core/1.0.0": {
+    "HealthBuilder.DataAccess/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "HealthBuilder.DataAccess/1.0.0": {
+    "HealthBuilder.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "HealthBuilder.Repositories/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

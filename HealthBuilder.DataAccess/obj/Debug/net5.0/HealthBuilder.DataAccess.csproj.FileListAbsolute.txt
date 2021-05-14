@@ -22,8 +22,6 @@
 /Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/bin/Debug/net5.0/HealthBuilder.DataAccess.dll
 /Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/bin/Debug/net5.0/ref/HealthBuilder.DataAccess.dll
 /Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/bin/Debug/net5.0/HealthBuilder.DataAccess.pdb
-/Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/bin/Debug/net5.0/HealthBuilder.Core.dll
-/Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/bin/Debug/net5.0/HealthBuilder.Core.pdb
 /Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/obj/Debug/net5.0/HealthBuilder.DataAccess.csprojAssemblyReference.cache
 /Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/obj/Debug/net5.0/HealthBuilder.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
 /Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/obj/Debug/net5.0/HealthBuilder.DataAccess.AssemblyInfoInputs.cache
@@ -34,3 +32,7 @@
 /Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/obj/Debug/net5.0/ref/HealthBuilder.DataAccess.dll
 /Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/obj/Debug/net5.0/HealthBuilder.DataAccess.pdb
 /Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/obj/Debug/net5.0/HealthBuilder.DataAccess.genruntimeconfig.cache
+/Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/bin/Debug/net5.0/HealthBuilder.Domain.dll
+/Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/bin/Debug/net5.0/HealthBuilder.Repositories.dll
+/Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/bin/Debug/net5.0/HealthBuilder.Domain.pdb
+/Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/bin/Debug/net5.0/HealthBuilder.Repositories.pdb

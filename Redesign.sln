@@ -2,9 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthBuilder.API", "HealthBuilder.API\HealthBuilder.API.csproj", "{4EB99114-B3FD-446D-BD77-EA9A77520A64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthBuilder.Core", "HealthBuilder.Core\HealthBuilder.Core.csproj", "{A73069D5-3093-4B17-92FF-D247C061A116}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthBuilder.Domain", "HealthBuilder.Domain\HealthBuilder.Domain.csproj", "{A73069D5-3093-4B17-92FF-D247C061A116}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthBuilder.DataAccess", "HealthBuilder.DataAccess\HealthBuilder.DataAccess.csproj", "{F48C238D-23CB-4BE2-93A9-788F811FD22D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthBuilder.Repositories", "HealthBuilder.Repositories\HealthBuilder.Repositories.csproj", "{6A6644E5-E2D9-4C2E-A115-01220302E9FF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,5 +26,9 @@ Global
 		{F48C238D-23CB-4BE2-93A9-788F811FD22D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F48C238D-23CB-4BE2-93A9-788F811FD22D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F48C238D-23CB-4BE2-93A9-788F811FD22D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A6644E5-E2D9-4C2E-A115-01220302E9FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A6644E5-E2D9-4C2E-A115-01220302E9FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A6644E5-E2D9-4C2E-A115-01220302E9FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A6644E5-E2D9-4C2E-A115-01220302E9FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

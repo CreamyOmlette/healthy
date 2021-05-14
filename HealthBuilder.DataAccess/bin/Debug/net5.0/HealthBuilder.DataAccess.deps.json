@@ -9,7 +9,8 @@
       "HealthBuilder.DataAccess/1.0.0": {
         "dependencies": {
           "AutoMapper": "10.1.1",
-          "HealthBuilder.Core": "1.0.0",
+          "HealthBuilder.Domain": "1.0.0",
+          "HealthBuilder.Repositories": "1.0.0",
           "Microsoft.EntityFrameworkCore": "6.0.0-preview.3.21201.2",
           "Microsoft.EntityFrameworkCore.Design": "6.0.0-preview.3.21201.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.0-preview.3.21201.2"
@@ -520,9 +521,18 @@
           }
         }
       },
-      "HealthBuilder.Core/1.0.0": {
+      "HealthBuilder.Domain/1.0.0": {
         "runtime": {
-          "HealthBuilder.Core.dll": {}
+          "HealthBuilder.Domain.dll": {}
+        }
+      },
+      "HealthBuilder.Repositories/1.0.0": {
+        "dependencies": {
+          "HealthBuilder.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "6.0.0-preview.3.21201.2"
+        },
+        "runtime": {
+          "HealthBuilder.Repositories.dll": {}
         }
       }
     }
@@ -848,7 +858,12 @@
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     },
-    "HealthBuilder.Core/1.0.0": {
+    "HealthBuilder.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "HealthBuilder.Repositories/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

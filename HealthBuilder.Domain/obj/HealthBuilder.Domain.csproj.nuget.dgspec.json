@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.Domain/HealthBuilder.Domain.csproj": {}
+    "/Users/alexlipceanu/Redesign/src/HealthBuilder.Domain/HealthBuilder.Domain.csproj": {}
   },
   "projects": {
-    "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.Domain/HealthBuilder.Domain.csproj": {
+    "/Users/alexlipceanu/Redesign/src/HealthBuilder.Domain/HealthBuilder.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.Domain/HealthBuilder.Domain.csproj",
+        "projectUniqueName": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Domain/HealthBuilder.Domain.csproj",
         "projectName": "HealthBuilder.Domain",
-        "projectPath": "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.Domain/HealthBuilder.Domain.csproj",
+        "projectPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Domain/HealthBuilder.Domain.csproj",
         "packagesPath": "/Users/alexlipceanu/.nuget/packages/",
-        "outputPath": "/Users/alexlipceanu/Projects/RiderProjects/Redesign/HealthBuilder.Domain/obj/",
+        "outputPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/alexlipceanu/.nuget/NuGet/NuGet.Config"

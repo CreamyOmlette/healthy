@@ -51,7 +51,7 @@ namespace HealthBuilder.API.Migrations
                     b.ToTable("ExerciseRoutine");
                 });
 
-            modelBuilder.Entity("HealthBuilder.Core.Entities.Exercise", b =>
+            modelBuilder.Entity("HealthBuilder.Domain.Entities.Exercise", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -81,7 +81,7 @@ namespace HealthBuilder.API.Migrations
                     b.ToTable("Exercises");
                 });
 
-            modelBuilder.Entity("HealthBuilder.Core.Entities.Meal", b =>
+            modelBuilder.Entity("HealthBuilder.Domain.Entities.Meal", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -117,7 +117,7 @@ namespace HealthBuilder.API.Migrations
                     b.ToTable("Meals");
                 });
 
-            modelBuilder.Entity("HealthBuilder.Core.Entities.Muscle", b =>
+            modelBuilder.Entity("HealthBuilder.Domain.Entities.Muscle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -135,7 +135,7 @@ namespace HealthBuilder.API.Migrations
                     b.ToTable("Muscles");
                 });
 
-            modelBuilder.Entity("HealthBuilder.Core.Entities.Routine", b =>
+            modelBuilder.Entity("HealthBuilder.Domain.Entities.Routine", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -156,7 +156,7 @@ namespace HealthBuilder.API.Migrations
                     b.ToTable("Routines");
                 });
 
-            modelBuilder.Entity("HealthBuilder.Core.Entities.ScheduledActivity", b =>
+            modelBuilder.Entity("HealthBuilder.Domain.Entities.ScheduledActivity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -179,7 +179,7 @@ namespace HealthBuilder.API.Migrations
                     b.ToTable("ScheduledActivity");
                 });
 
-            modelBuilder.Entity("HealthBuilder.Core.Entities.User", b =>
+            modelBuilder.Entity("HealthBuilder.Domain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -213,9 +213,9 @@ namespace HealthBuilder.API.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("HealthBuilder.Core.Entities.ScheduledMeal", b =>
+            modelBuilder.Entity("HealthBuilder.Domain.Entities.ScheduledMeal", b =>
                 {
-                    b.HasBaseType("HealthBuilder.Core.Entities.ScheduledActivity");
+                    b.HasBaseType("HealthBuilder.Domain.Entities.ScheduledActivity");
 
                     b.Property<int>("MealId")
                         .HasColumnType("int");
@@ -225,9 +225,9 @@ namespace HealthBuilder.API.Migrations
                     b.ToTable("ScheduledMeal");
                 });
 
-            modelBuilder.Entity("HealthBuilder.Core.Entities.ScheduledRoutine", b =>
+            modelBuilder.Entity("HealthBuilder.Domain.Entities.ScheduledRoutine", b =>
                 {
-                    b.HasBaseType("HealthBuilder.Core.Entities.ScheduledActivity");
+                    b.HasBaseType("HealthBuilder.Domain.Entities.ScheduledActivity");
 
                     b.Property<int>("RoutineId")
                         .HasColumnType("int");
@@ -239,13 +239,13 @@ namespace HealthBuilder.API.Migrations
 
             modelBuilder.Entity("ExerciseMuscle", b =>
                 {
-                    b.HasOne("HealthBuilder.Core.Entities.Exercise", null)
+                    b.HasOne("HealthBuilder.Domain.Entities.Exercise", null)
                         .WithMany()
                         .HasForeignKey("ExercisesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HealthBuilder.Core.Entities.Muscle", null)
+                    b.HasOne("HealthBuilder.Domain.Entities.Muscle", null)
                         .WithMany()
                         .HasForeignKey("MusclesId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -254,22 +254,22 @@ namespace HealthBuilder.API.Migrations
 
             modelBuilder.Entity("ExerciseRoutine", b =>
                 {
-                    b.HasOne("HealthBuilder.Core.Entities.Exercise", null)
+                    b.HasOne("HealthBuilder.Domain.Entities.Exercise", null)
                         .WithMany()
                         .HasForeignKey("ExercisesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HealthBuilder.Core.Entities.Routine", null)
+                    b.HasOne("HealthBuilder.Domain.Entities.Routine", null)
                         .WithMany()
                         .HasForeignKey("RoutinesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("HealthBuilder.Core.Entities.ScheduledActivity", b =>
+            modelBuilder.Entity("HealthBuilder.Domain.Entities.ScheduledActivity", b =>
                 {
-                    b.HasOne("HealthBuilder.Core.Entities.User", "User")
+                    b.HasOne("HealthBuilder.Domain.Entities.User", "User")
                         .WithMany("ScheduledActivities")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -278,15 +278,15 @@ namespace HealthBuilder.API.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("HealthBuilder.Core.Entities.ScheduledMeal", b =>
+            modelBuilder.Entity("HealthBuilder.Domain.Entities.ScheduledMeal", b =>
                 {
-                    b.HasOne("HealthBuilder.Core.Entities.ScheduledActivity", null)
+                    b.HasOne("HealthBuilder.Domain.Entities.ScheduledActivity", null)
                         .WithOne()
-                        .HasForeignKey("HealthBuilder.Core.Entities.ScheduledMeal", "Id")
+                        .HasForeignKey("HealthBuilder.Domain.Entities.ScheduledMeal", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
-                    b.HasOne("HealthBuilder.Core.Entities.Meal", "Meal")
+                    b.HasOne("HealthBuilder.Domain.Entities.Meal", "Meal")
                         .WithMany("ScheduledMeals")
                         .HasForeignKey("MealId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -295,15 +295,15 @@ namespace HealthBuilder.API.Migrations
                     b.Navigation("Meal");
                 });
 
-            modelBuilder.Entity("HealthBuilder.Core.Entities.ScheduledRoutine", b =>
+            modelBuilder.Entity("HealthBuilder.Domain.Entities.ScheduledRoutine", b =>
                 {
-                    b.HasOne("HealthBuilder.Core.Entities.ScheduledActivity", null)
+                    b.HasOne("HealthBuilder.Domain.Entities.ScheduledActivity", null)
                         .WithOne()
-                        .HasForeignKey("HealthBuilder.Core.Entities.ScheduledRoutine", "Id")
+                        .HasForeignKey("HealthBuilder.Domain.Entities.ScheduledRoutine", "Id")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
-                    b.HasOne("HealthBuilder.Core.Entities.Routine", "Routine")
+                    b.HasOne("HealthBuilder.Domain.Entities.Routine", "Routine")
                         .WithMany("Routines")
                         .HasForeignKey("RoutineId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -312,17 +312,17 @@ namespace HealthBuilder.API.Migrations
                     b.Navigation("Routine");
                 });
 
-            modelBuilder.Entity("HealthBuilder.Core.Entities.Meal", b =>
+            modelBuilder.Entity("HealthBuilder.Domain.Entities.Meal", b =>
                 {
                     b.Navigation("ScheduledMeals");
                 });
 
-            modelBuilder.Entity("HealthBuilder.Core.Entities.Routine", b =>
+            modelBuilder.Entity("HealthBuilder.Domain.Entities.Routine", b =>
                 {
                     b.Navigation("Routines");
                 });
 
-            modelBuilder.Entity("HealthBuilder.Core.Entities.User", b =>
+            modelBuilder.Entity("HealthBuilder.Domain.Entities.User", b =>
                 {
                     b.Navigation("ScheduledActivities");
                 });

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthBuilder.Core.Entities;
-using HealthBuilder.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.Repositories
+namespace HealthBuilder.Repositories
 {
     public class ScheduledRoutineRepository: Repository<ScheduledRoutine>, IScheduledRoutineRepository
     {

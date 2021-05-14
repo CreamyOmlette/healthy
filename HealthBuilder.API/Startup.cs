@@ -1,6 +1,4 @@
-
-using DataAccess.Repositories;
-using HealthBuilder.Core.Repositories;
+using HealthBuilder.Repositories;
 using HealthBuilder.Core.Entities;
 using HealthBuilder.DataAccess;
 using Microsoft.AspNetCore.Builder;

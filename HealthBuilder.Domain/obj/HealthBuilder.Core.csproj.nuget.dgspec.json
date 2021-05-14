@@ -8,7 +8,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Core/HealthBuilder.Core.csproj",
-        "projectName": "HealthBuilder.Core",
+        "projectName": "HealthBuilder.Domain",
         "projectPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Core/HealthBuilder.Core.csproj",
         "packagesPath": "/Users/alexlipceanu/.nuget/packages/",
         "outputPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Core/obj/",

@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
-using HealthBuilder.Core.Repositories;
 using HealthBuilder.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using HealthBuilder.API.Dtos;
+using HealthBuilder.Repositories;
 
 namespace HealthBuilder.API.Controllers
 {
@@ -98,10 +99,11 @@ namespace HealthBuilder.API.Controllers
             return Ok(scheduledRoutinesDto);
         }
 
-        [HttpDelete("schedules/{id}")]
-        public async Task<IActionResult> RemoveScheduledItem(int id)
+        [HttpDelete("schedules/{userId}")]
+        public async Task<IActionResult> RemoveScheduledItem(int userId, int activityId)
         {
-            var scheduledItem = await _scheduleRepository.GetByIdAsync(id);
+            var scheduledItem = (await _scheduleRepository.GetAllAsync())
+                .FirstOrDefault(e => e.UserId == userId && e.Id == activityId);
             if (scheduledItem != null)
             {
                 _scheduleRepository.Remove(scheduledItem);

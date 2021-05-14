@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthBuilder.Core.Entities;
-using HealthBuilder.Core.Repositories;
+using HealthBuilder.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.Repositories
+namespace HealthBuilder.Repositories
 {
     public class ScheduledMealRepository : Repository<ScheduledMeal>, IScheduledMealRepository
     {

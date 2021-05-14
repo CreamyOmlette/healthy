@@ -1567,22 +1567,13 @@
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
       },
-      "HealthBuilder.Core/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
-        "compile": {
-          "bin/placeholder/HealthBuilder.Core.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/HealthBuilder.Core.dll": {}
-        }
-      },
       "HealthBuilder.DataAccess/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
           "AutoMapper": "10.1.1",
-          "HealthBuilder.Core": "1.0.0",
+          "HealthBuilder.Domain": "1.0.0",
+          "HealthBuilder.Repositories": "1.0.0",
           "Microsoft.EntityFrameworkCore": "6.0.0-preview.3.21201.2",
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.0-preview.3.21201.2"
         },
@@ -1591,6 +1582,30 @@
         },
         "runtime": {
           "bin/placeholder/HealthBuilder.DataAccess.dll": {}
+        }
+      },
+      "HealthBuilder.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/HealthBuilder.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HealthBuilder.Domain.dll": {}
+        }
+      },
+      "HealthBuilder.Repositories/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "HealthBuilder.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "6.0.0-preview.3.21201.2"
+        },
+        "compile": {
+          "bin/placeholder/HealthBuilder.Repositories.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HealthBuilder.Repositories.dll": {}
         }
       }
     }
@@ -5933,15 +5948,20 @@
         "system.xml.xmldocument.nuspec"
       ]
     },
-    "HealthBuilder.Core/1.0.0": {
-      "type": "project",
-      "path": "../HealthBuilder.Core/HealthBuilder.Core.csproj",
-      "msbuildProject": "../HealthBuilder.Core/HealthBuilder.Core.csproj"
-    },
     "HealthBuilder.DataAccess/1.0.0": {
       "type": "project",
       "path": "../HealthBuilder.DataAccess/HealthBuilder.DataAccess.csproj",
       "msbuildProject": "../HealthBuilder.DataAccess/HealthBuilder.DataAccess.csproj"
+    },
+    "HealthBuilder.Domain/1.0.0": {
+      "type": "project",
+      "path": "../HealthBuilder.Domain/HealthBuilder.Domain.csproj",
+      "msbuildProject": "../HealthBuilder.Domain/HealthBuilder.Domain.csproj"
+    },
+    "HealthBuilder.Repositories/1.0.0": {
+      "type": "project",
+      "path": "../HealthBuilder.Repositories/HealthBuilder.Repositories.csproj",
+      "msbuildProject": "../HealthBuilder.Repositories/HealthBuilder.Repositories.csproj"
     }
   },
   "projectFileDependencyGroups": {
