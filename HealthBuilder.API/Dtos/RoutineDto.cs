@@ -11,5 +11,8 @@ namespace HealthBuilder.API.Dtos
         [Required]
         public string Description { get; set; }
         
+        public string Reps { get; set; }
+        public string Sets { get; set; }
+        public int Duration { get; set; }
     }
 }

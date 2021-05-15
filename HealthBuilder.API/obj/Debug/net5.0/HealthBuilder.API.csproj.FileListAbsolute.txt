@@ -148,3 +148,5 @@
 /Users/alexlipceanu/Redesign/src/HealthBuilder.API/bin/Debug/net5.0/HealthBuilder.Repositories.dll
 /Users/alexlipceanu/Redesign/src/HealthBuilder.API/bin/Debug/net5.0/HealthBuilder.Domain.pdb
 /Users/alexlipceanu/Redesign/src/HealthBuilder.API/bin/Debug/net5.0/HealthBuilder.Repositories.pdb
+/Users/alexlipceanu/Redesign/src/HealthBuilder.API/bin/Debug/net5.0/HealthBuilder.Services.dll
+/Users/alexlipceanu/Redesign/src/HealthBuilder.API/bin/Debug/net5.0/HealthBuilder.Services.pdb

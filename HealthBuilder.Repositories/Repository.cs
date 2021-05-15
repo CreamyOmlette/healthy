@@ -39,9 +39,10 @@ namespace HealthBuilder.Repositories
             return await _set.FirstOrDefaultAsync(predicate);
         }
 
-        public async Task AddAsync(TEntity entity)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
-            await _set.AddAsync(entity);
+            var response = await _set.AddAsync(entity);
+            return response.Entity;
         }
 
         public async Task AddRangeAsync(IEnumerable<TEntity> entities)

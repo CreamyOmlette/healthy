@@ -19,7 +19,7 @@ namespace HealthBuilder.Repositories
 
         public async Task<IEnumerable<ScheduledRoutine>> GetScheduledRoutinesAsync(int userId)
         {
-            return await _set.Where(e => e.Id == userId).Include(e => e.Routine).ToListAsync();
+            return await _set.Where(e => e.UserId == userId).Include(e => e.Routine).ToListAsync();
         }
 
         public async Task<ScheduledRoutine> ScheduleRoutineAsync(int userId, int routineId, DateTime date)

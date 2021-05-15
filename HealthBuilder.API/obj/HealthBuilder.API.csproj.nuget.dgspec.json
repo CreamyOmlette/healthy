@@ -28,6 +28,9 @@
             "projectReferences": {
               "/Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/HealthBuilder.DataAccess.csproj": {
                 "projectPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/HealthBuilder.DataAccess.csproj"
+              },
+              "/Users/alexlipceanu/Redesign/src/HealthBuilder.Services/HealthBuilder.Services.csproj": {
+                "projectPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Services/HealthBuilder.Services.csproj"
               }
             }
           }
@@ -261,6 +264,62 @@
               "version": "[6.0.0-preview.3.21201.2, )"
             }
           },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.201/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/alexlipceanu/Redesign/src/HealthBuilder.Services/HealthBuilder.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Services/HealthBuilder.Services.csproj",
+        "projectName": "HealthBuilder.Services",
+        "projectPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Services/HealthBuilder.Services.csproj",
+        "packagesPath": "/Users/alexlipceanu/.nuget/packages/",
+        "outputPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Services/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/alexlipceanu/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/Users/alexlipceanu/Redesign/src/HealthBuilder.Repositories/HealthBuilder.Repositories.csproj": {
+                "projectPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Repositories/HealthBuilder.Repositories.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "imports": [
             "net461",
             "net462",

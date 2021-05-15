@@ -7,9 +7,9 @@ namespace HealthBuilder.Repositories
 {
     public interface IScheduledMealRepository : IRepository<ScheduledMeal>
     {
-        Task<IEnumerable<ScheduledMeal>> GetAllByUserAsync(int userId);
+        Task<IEnumerable<ScheduledMeal>> GetScheduledMealsAsync(int userId);
         Task<ScheduledMeal> ScheduleMeal(int userId, int mealId, DateTime date);
         void RemoveScheduledMeal(int userId, int scheduledMealId);
-        Task SaveChangesAsync();
+        new Task SaveChangesAsync();
     }
 }

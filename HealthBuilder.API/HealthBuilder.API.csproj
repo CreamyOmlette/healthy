@@ -17,6 +17,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\HealthBuilder.DataAccess\HealthBuilder.DataAccess.csproj" />
+      <ProjectReference Include="..\HealthBuilder.Services\HealthBuilder.Services.csproj" />
     </ItemGroup>
 
     <ItemGroup>

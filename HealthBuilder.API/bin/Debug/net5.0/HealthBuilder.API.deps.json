@@ -36,6 +36,7 @@
           "AutoMapper": "10.1.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.1",
           "HealthBuilder.DataAccess": "1.0.0",
+          "HealthBuilder.Services": "1.0.0",
           "Microsoft.EntityFrameworkCore.Design": "6.0.0-preview.3.21201.2",
           "Microsoft.EntityFrameworkCore.Tools.DotNet": "2.0.3",
           "Swashbuckle.AspNetCore": "5.6.3",
@@ -1399,6 +1400,17 @@
         },
         "compile": {
           "HealthBuilder.Repositories.dll": {}
+        }
+      },
+      "HealthBuilder.Services/1.0.0": {
+        "dependencies": {
+          "HealthBuilder.Repositories": "1.0.0"
+        },
+        "runtime": {
+          "HealthBuilder.Services.dll": {}
+        },
+        "compile": {
+          "HealthBuilder.Services.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/5.0.0.0": {
@@ -3740,6 +3752,11 @@
       "sha512": ""
     },
     "HealthBuilder.Repositories/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "HealthBuilder.Services/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -24,5 +24,8 @@ namespace HealthBuilder.API.Dtos
         
         [Required]
         public int Fats { get; set; }
+        
+        [Required]
+        public int Mass { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 using HealthBuilder.Repositories;
 using HealthBuilder.Core.Entities;
 using HealthBuilder.DataAccess;
+using HealthBuilder.Services;
+using HealthBuilder.Services.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -40,6 +42,10 @@ namespace HealthBuilder.API
             services.AddScoped<IScheduledRoutineRepository, ScheduledRoutineRepository>();
             
             services.AddScoped<IRepository<ScheduledActivity>, Repository<ScheduledActivity>>();
+            
+            services.AddScoped<IRepository<User>, Repository<User>>();
+
+            services.AddScoped<ISchedulingService, SchedulingService>();
             
             services.AddAutoMapper(typeof(Startup));
             

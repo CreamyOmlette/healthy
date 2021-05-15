@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using HealthBuilder.API.Dtos;
 using HealthBuilder.Repositories;
+using HealthBuilder.Services.Contracts;
 
 namespace HealthBuilder.API.Controllers
 {
@@ -15,103 +16,91 @@ namespace HealthBuilder.API.Controllers
     [ApiController]
     public class ScheduleController : ControllerBase
     {
-        private readonly IScheduledMealRepository _scheduledMealRepository;
-        private readonly IScheduledRoutineRepository _scheduledRoutineRepository;
-        private readonly IRepository<Routine> _routineRepository;
-        private readonly IRepository<Meal> _mealRepository;
-        private readonly IRepository<ScheduledActivity> _scheduleRepository;
+        private readonly ISchedulingService _schedulingService;
         private readonly IMapper _mapper;
-        public ScheduleController
-        (
-            IScheduledMealRepository scheduledMealRepository,
-            IScheduledRoutineRepository scheduledRoutineRepository,
-            IRepository<Routine> routineRepository,
-            IRepository<Meal> mealRepository,
-            IRepository<ScheduledActivity> scheduleRepository,
-            IMapper mapper
-            )
+
+        public ScheduleController(ISchedulingService schedulingService, IMapper mapper)
         {
-            _scheduledMealRepository = scheduledMealRepository;
-            _scheduledRoutineRepository = scheduledRoutineRepository;
-            _mealRepository = mealRepository;
-            _routineRepository = routineRepository;
+            _schedulingService = schedulingService;
             _mapper = mapper;
-            _scheduleRepository = scheduleRepository;
         }
 
         [HttpPost("routines/{id}")]
-        public async Task<IActionResult> ScheduleRoutine(int id, int routineId, string dateStr)
+        public async Task<IActionResult> ScheduleRoutine(int id, int routineId, DateTime date)
         {
-            var date = DateTime.ParseExact(dateStr, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            var routine = await _routineRepository.GetByIdAsync(routineId);
-            if (routine != null)
+            try
             {
-                var item = new ScheduledRoutine
-                {
-                    UserId = id,
-                    RoutineId = routineId,
-                    Date = date
-                };
-                await _scheduledRoutineRepository.ScheduleRoutineAsync(id, routineId, date);
-                await _scheduledRoutineRepository.SaveChangesAsync();
-                return Ok(item);
+                var result = await _schedulingService.ScheduleRoutine(id, routineId, date);
+                var scheduledRoutineDto =
+                    _mapper.Map<ScheduledRoutine, ScheduledRoutineDto>(result);
+                return Ok(scheduledRoutineDto);
             }
-
-            return NotFound();
+            catch (ArgumentException e)
+            {
+                return NotFound(e.Message);
+            }
         }
         
         [HttpPost("meals/{id}")]
-        public async Task<IActionResult> ScheduleMeal(int id, int mealId, string dateStr)
+        public async Task<IActionResult> ScheduleMeal(int id, int mealId, DateTime date)
         {
-            var date = DateTime.ParseExact(dateStr, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            var meal = await _mealRepository.GetByIdAsync(mealId);
-            if (meal != null)
+            try
             {
-                var item = new ScheduledMeal
-                {
-                    UserId = id,
-                    MealId = mealId,
-                    Date = date
-                };
-                await _scheduledMealRepository.ScheduleMeal(id, mealId, date);
-                await _scheduledMealRepository.SaveChangesAsync();
-                return Ok(item);
+                var result = await _schedulingService.ScheduleMeal(id, mealId, date);
+                var scheduledMealDto =
+                    _mapper.Map<ScheduledMeal, ScheduledMealDto>(result);
+                return Ok(scheduledMealDto);
             }
-
-            return NotFound();
+            catch (ArgumentException e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         [HttpGet("meals/{id}")]
         public async Task<IActionResult> GetScheduledMeals(int id)
         {
-            var scheduledMeals = await _scheduledMealRepository.GetAllByUserAsync(id);
-            var scheduledMealsDto =
-                _mapper.Map<IEnumerable<ScheduledMeal>, IEnumerable<ScheduledMealDto>>(scheduledMeals);
-            return Ok(scheduledMealsDto);
+            try
+            {
+                var scheduledMeals = await _schedulingService.GetAllScheduledMeals(id);
+                var scheduledMealsDto =
+                    _mapper.Map<IEnumerable<ScheduledMeal>, IEnumerable<ScheduledMealDto>>(scheduledMeals);
+                return Ok(scheduledMealsDto);
+            }
+            catch (ArgumentException e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         [HttpGet("routines/{id}")]
         public async Task<IActionResult> GetScheduledRoutines(int id)
         {
-            var scheduledRoutines = await _scheduledRoutineRepository.GetScheduledRoutinesAsync(id);
-            var scheduledRoutinesDto = 
-                _mapper.Map<IEnumerable<ScheduledRoutine>, IEnumerable<ScheduledRoutineDto>>(scheduledRoutines);
-            return Ok(scheduledRoutinesDto);
+            try
+            {
+                var scheduledRoutines = await _schedulingService.GetAllScheduledRoutines(id);
+                var scheduledRoutinesDto =
+                    _mapper.Map<IEnumerable<ScheduledRoutine>, IEnumerable<ScheduledRoutineDto>>(scheduledRoutines);
+                return Ok(scheduledRoutinesDto);
+            }
+            catch (ArgumentException e)
+            {
+                return NotFound(e.Message);
+            }
         }
 
         [HttpDelete("schedules/{userId}")]
-        public async Task<IActionResult> RemoveScheduledItem(int userId, int activityId)
+        public async Task<IActionResult> RemoveScheduledActivity(int userId, int activityId)
         {
-            var scheduledItem = (await _scheduleRepository.GetAllAsync())
-                .FirstOrDefault(e => e.UserId == userId && e.Id == activityId);
-            if (scheduledItem != null)
+            try
             {
-                _scheduleRepository.Remove(scheduledItem);
-                await _scheduleRepository.SaveChangesAsync();
+                await _schedulingService.RemoveScheduledActivity(userId, activityId);
                 return Ok();
             }
-
-            return NotFound();
+            catch (ArgumentException e)
+            {
+                return NotFound(e.Message);
+            }
         }
     }
 }

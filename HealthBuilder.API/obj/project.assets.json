@@ -1607,6 +1607,19 @@
         "runtime": {
           "bin/placeholder/HealthBuilder.Repositories.dll": {}
         }
+      },
+      "HealthBuilder.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "HealthBuilder.Repositories": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/HealthBuilder.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HealthBuilder.Services.dll": {}
+        }
       }
     }
   },
@@ -5962,6 +5975,11 @@
       "type": "project",
       "path": "../HealthBuilder.Repositories/HealthBuilder.Repositories.csproj",
       "msbuildProject": "../HealthBuilder.Repositories/HealthBuilder.Repositories.csproj"
+    },
+    "HealthBuilder.Services/1.0.0": {
+      "type": "project",
+      "path": "../HealthBuilder.Services/HealthBuilder.Services.csproj",
+      "msbuildProject": "../HealthBuilder.Services/HealthBuilder.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -5969,6 +5987,7 @@
       "AutoMapper >= 10.1.1",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 8.1.1",
       "HealthBuilder.DataAccess >= 1.0.0",
+      "HealthBuilder.Services >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.0-preview.3.21201.2",
       "Microsoft.EntityFrameworkCore.Tools.DotNet >= 2.0.3",
       "Swashbuckle.AspNetCore >= 5.6.3"
@@ -6001,6 +6020,9 @@
           "projectReferences": {
             "/Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/HealthBuilder.DataAccess.csproj": {
               "projectPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/HealthBuilder.DataAccess.csproj"
+            },
+            "/Users/alexlipceanu/Redesign/src/HealthBuilder.Services/HealthBuilder.Services.csproj": {
+              "projectPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Services/HealthBuilder.Services.csproj"
             }
           }
         }

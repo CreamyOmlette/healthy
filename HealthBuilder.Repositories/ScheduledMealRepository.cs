@@ -18,11 +18,12 @@ namespace HealthBuilder.Repositories
             _set = context.Set<ScheduledMeal>();
         }
         
-        public async Task<IEnumerable<ScheduledMeal>> GetAllByUserAsync(int userId)
+        public async Task<IEnumerable<ScheduledMeal>> GetScheduledMealsAsync(int userId)
         {
             var result = _set.Where(e => e.UserId == userId).Include(e => e.Meal).ToListAsync();
             return await result;
         }
+        
 
         public async Task<ScheduledMeal> ScheduleMeal(int userId, int mealId, DateTime date)
         {
