@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
 using HealthBuilder.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using HealthBuilder.API.Dtos;
-using HealthBuilder.Repositories;
 using HealthBuilder.Services.Contracts;
+using HealthBuilder.Services.Dtos;
 
 namespace HealthBuilder.API.Controllers
 {
@@ -17,12 +14,10 @@ namespace HealthBuilder.API.Controllers
     public class ScheduleController : ControllerBase
     {
         private readonly ISchedulingService _schedulingService;
-        private readonly IMapper _mapper;
 
-        public ScheduleController(ISchedulingService schedulingService, IMapper mapper)
+        public ScheduleController(ISchedulingService schedulingService)
         {
             _schedulingService = schedulingService;
-            _mapper = mapper;
         }
 
         [HttpPost("routines/{id}")]
@@ -31,9 +26,7 @@ namespace HealthBuilder.API.Controllers
             try
             {
                 var result = await _schedulingService.ScheduleRoutine(id, routineId, date);
-                var scheduledRoutineDto =
-                    _mapper.Map<ScheduledRoutine, ScheduledRoutineDto>(result);
-                return Ok(scheduledRoutineDto);
+                return Ok(result);
             }
             catch (ArgumentException e)
             {
@@ -47,9 +40,7 @@ namespace HealthBuilder.API.Controllers
             try
             {
                 var result = await _schedulingService.ScheduleMeal(id, mealId, date);
-                var scheduledMealDto =
-                    _mapper.Map<ScheduledMeal, ScheduledMealDto>(result);
-                return Ok(scheduledMealDto);
+                return Ok(result);
             }
             catch (ArgumentException e)
             {
@@ -62,10 +53,8 @@ namespace HealthBuilder.API.Controllers
         {
             try
             {
-                var scheduledMeals = await _schedulingService.GetAllScheduledMeals(id);
-                var scheduledMealsDto =
-                    _mapper.Map<IEnumerable<ScheduledMeal>, IEnumerable<ScheduledMealDto>>(scheduledMeals);
-                return Ok(scheduledMealsDto);
+                var result = await _schedulingService.GetAllScheduledMeals(id);
+                return Ok(result);
             }
             catch (ArgumentException e)
             {
@@ -78,10 +67,8 @@ namespace HealthBuilder.API.Controllers
         {
             try
             {
-                var scheduledRoutines = await _schedulingService.GetAllScheduledRoutines(id);
-                var scheduledRoutinesDto =
-                    _mapper.Map<IEnumerable<ScheduledRoutine>, IEnumerable<ScheduledRoutineDto>>(scheduledRoutines);
-                return Ok(scheduledRoutinesDto);
+                var result = await _schedulingService.GetAllScheduledRoutines(id);
+                return Ok(result);
             }
             catch (ArgumentException e)
             {
@@ -89,7 +76,7 @@ namespace HealthBuilder.API.Controllers
             }
         }
 
-        [HttpDelete("schedules/{userId}")]
+        [HttpDelete("{userId}/{activityId}")]
         public async Task<IActionResult> RemoveScheduledActivity(int userId, int activityId)
         {
             try

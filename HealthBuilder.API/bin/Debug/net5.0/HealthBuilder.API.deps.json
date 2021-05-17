@@ -1404,6 +1404,7 @@
       },
       "HealthBuilder.Services/1.0.0": {
         "dependencies": {
+          "AutoMapper": "10.1.1",
           "HealthBuilder.Repositories": "1.0.0"
         },
         "runtime": {

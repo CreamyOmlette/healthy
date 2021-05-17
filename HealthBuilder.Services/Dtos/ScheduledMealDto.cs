@@ -1,10 +1,13 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HealthBuilder.API.Dtos
+namespace HealthBuilder.Services.Dtos
 {
     public class ScheduledMealDto
     {
+        [Required]
+        public int Id { get; set; }
+        
         [Required] 
         public MealDto Meal { get; set; }
         

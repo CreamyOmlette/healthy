@@ -1,10 +1,8 @@
 using System;
-using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using HealthBuilder.Core.Entities;
-using HealthBuilder.Repositories;
+using HealthBuilder.Services.Dtos;
+using HealthBuilder.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthBuilder.API.Controllers
@@ -13,34 +11,26 @@ namespace HealthBuilder.API.Controllers
     [Route("api/users")]
     public class UserController : ControllerBase
     {
-        private readonly IRepository<User> _userRepository;
-        private readonly IMapper _mapper;
+        private readonly IUserService _userService;
 
-        public UserController(IRepository<User> userRepository, IMapper mapper)
+        public UserController(IUserService userService)
         {
-            _userRepository = userRepository;
-            _mapper = mapper;
+            _userService = userService;
         }
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> RegisterUser(string username, string password, int height, int weight, string dob)
+        public async Task<IActionResult> RegisterUser(UserDto userDto)
         {
-            var validator = (await _userRepository.GetAllAsync()).Any(e => e.Username.Equals(username));
-            if (!validator)
+            try
             {
-                var user = new User
-                {
-                    Username = username,
-                    Password = password,
-                    Height = height,
-                    Weight = weight,
-                    DoB = DateTime.ParseExact(dob, "dd/MM/yyyy", CultureInfo.InvariantCulture)
-                };
-                return Ok();
+                var result = await _userService.RegisterUser(userDto);
+                return Ok(result);
             }
-
-            return BadRequest("username already exists");
+            catch (ArgumentException e)
+            {
+                return NotFound(e.Message);
+            }
         }
     }
 }

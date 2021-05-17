@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HealthBuilder.API.Dtos
+namespace HealthBuilder.Services.Dtos
 {
     public class UserDto
     {
@@ -25,7 +25,6 @@ namespace HealthBuilder.API.Dtos
         [MyDoB(ErrorMessage = "Date of birth is invalid")]
         public DateTime DoB { get; set; }
     }
-    
     public class MyDoBAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)// Return a boolean value: true == IsValid, false != IsValid

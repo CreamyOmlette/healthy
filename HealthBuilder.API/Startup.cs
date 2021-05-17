@@ -1,10 +1,14 @@
+using System.Reflection;
+using AutoMapper;
 using HealthBuilder.Repositories;
 using HealthBuilder.Core.Entities;
 using HealthBuilder.DataAccess;
 using HealthBuilder.Services;
 using HealthBuilder.Services.Contracts;
+using HealthBuilder.Services.Profiles;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,8 +50,18 @@ namespace HealthBuilder.API
             services.AddScoped<IRepository<User>, Repository<User>>();
 
             services.AddScoped<ISchedulingService, SchedulingService>();
+
+            services.AddScoped<IUserService, UserService>();
+
+            services.AddScoped<IMealService, MealService>();
+
+            services.AddScoped<IRoutineService, RoutineService>();
+
+            services.AddScoped<IRoutineRepository, RoutineRepository>();
+
+            services.AddAutoMapper(typeof(MappingProfile));
             
-            services.AddAutoMapper(typeof(Startup));
+            
             
             services.AddSwaggerGen(c =>
             {

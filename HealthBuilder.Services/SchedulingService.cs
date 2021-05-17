@@ -1,10 +1,13 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using HealthBuilder.Core.Entities;
 using HealthBuilder.Repositories;
 using HealthBuilder.Services.Contracts;
+using HealthBuilder.Services.Dtos;
 
 namespace HealthBuilder.Services
 {
@@ -16,9 +19,10 @@ namespace HealthBuilder.Services
         private readonly IScheduledMealRepository _scheduledMealRepository;
         private readonly IScheduledRoutineRepository _scheduledRoutineRepository;
         private readonly IRepository<ScheduledActivity> _scheduledActivityRepository;
+        private readonly IMapper _mapper;
         public SchedulingService(IRepository<User> userRepository, IRepository<Meal> mealRepository,
             IRepository<Routine> routineRepository, IScheduledMealRepository scheduledMealRepository,
-            IScheduledRoutineRepository scheduledRoutineRepository, IRepository<ScheduledActivity> scheduledActivityRepository)
+            IScheduledRoutineRepository scheduledRoutineRepository, IRepository<ScheduledActivity> scheduledActivityRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mealRepository = mealRepository;
@@ -26,8 +30,9 @@ namespace HealthBuilder.Services
             _scheduledMealRepository = scheduledMealRepository;
             _scheduledRoutineRepository = scheduledRoutineRepository;
             _scheduledActivityRepository = scheduledActivityRepository;
+            _mapper = mapper;
         }
-        public async Task<ScheduledRoutine> ScheduleRoutine(int userId, int routineId, DateTime date)
+        public async Task<ScheduledRoutineDto> ScheduleRoutine(int userId, int routineId, DateTime date)
         {
             var user = await _userRepository.GetByIdAsync(userId);
             if (user == null)
@@ -49,10 +54,11 @@ namespace HealthBuilder.Services
             };
             var result = await _scheduledRoutineRepository.AddAsync(scheduledRoutine);
             await _scheduledRoutineRepository.SaveChangesAsync();
-            return result;
+            var dto = _mapper.Map<ScheduledRoutineDto>(result);
+            return dto;
         }
 
-        public async Task<ScheduledMeal> ScheduleMeal(int userId, int mealId, DateTime date)
+        public async Task<ScheduledMealDto> ScheduleMeal(int userId, int mealId, DateTime date)
         {
             var user = await _userRepository.GetByIdAsync(userId);
             if (user == null)
@@ -74,7 +80,8 @@ namespace HealthBuilder.Services
             };
             var result = await _scheduledMealRepository.AddAsync(scheduledMeal);
             await _scheduledMealRepository.SaveChangesAsync();
-            return result;
+            var dto = _mapper.Map<ScheduledMealDto>(result);
+            return dto;
         }
 
         public async Task RemoveScheduledActivity(int userId, int activityId)
@@ -94,7 +101,7 @@ namespace HealthBuilder.Services
             await _scheduledActivityRepository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ScheduledMeal>> GetAllScheduledMeals(int userId)
+        public async Task<IEnumerable<ScheduledMealDto>> GetAllScheduledMeals(int userId)
         {
             var user = await _userRepository.GetByIdAsync(userId);
             if (user == null)
@@ -103,11 +110,12 @@ namespace HealthBuilder.Services
             }
 
             var scheduledMeals = await _scheduledMealRepository.GetScheduledMealsAsync(userId);
-            return scheduledMeals;
+            var dto = _mapper.Map<IEnumerable<ScheduledMealDto>>(scheduledMeals);
+            return dto;
 
         }
 
-        public async Task<IEnumerable<ScheduledRoutine>> GetAllScheduledRoutines(int userId)
+        public async Task<IEnumerable<ScheduledRoutineDto>> GetAllScheduledRoutines(int userId)
         {
             var user = await _userRepository.GetByIdAsync(userId);
             if (user == null)
@@ -115,7 +123,8 @@ namespace HealthBuilder.Services
                 throw new ArgumentException("User not found in the Database");
             }
             var scheduledRoutines = (await _scheduledRoutineRepository.GetScheduledRoutinesAsync(userId));
-            return scheduledRoutines;
+            var dto = _mapper.Map<IEnumerable<ScheduledRoutineDto>>(scheduledRoutines);
+            return dto;
             
         }
     }

@@ -1,10 +1,12 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HealthBuilder.API.Dtos
+namespace HealthBuilder.Services.Dtos
 {
     public class ScheduledRoutineDto
     {
+        [Required]
+        public int Id { get; set; }
         [Required]
         public RoutineDto Routine { get; set; }
         

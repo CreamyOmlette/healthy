@@ -1,8 +1,8 @@
 using AutoMapper;
 using HealthBuilder.Core.Entities;
-using HealthBuilder.API.Dtos;
+using HealthBuilder.Services.Dtos;
 
-namespace HealthBuilder.API.Profiles
+namespace HealthBuilder.Services.Profiles
 {
     public class MappingProfile : Profile
     {
@@ -13,6 +13,9 @@ namespace HealthBuilder.API.Profiles
 
             CreateMap<Meal, MealDto>();
             CreateMap<ScheduledMeal, ScheduledMealDto>();
+
+            CreateMap<Exercise, ExerciseDto>();
+            CreateMap<ExerciseDto, Exercise>();
         }
     }
 }
