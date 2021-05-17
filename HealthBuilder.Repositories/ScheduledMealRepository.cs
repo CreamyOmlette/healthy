@@ -2,54 +2,65 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using HealthBuilder.Core.Entities;
-using HealthBuilder.Repositories;
+using HealthBuilder.Infrastructure;
+using HealthBuilder.Infrastructure.Dtos;
+using HealthBuilder.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthBuilder.Repositories
 {
     public class ScheduledMealRepository : Repository<ScheduledMeal>, IScheduledMealRepository
     {
-        private readonly DbSet<ScheduledMeal> _set;
-        private readonly DbContext _context;
-        public ScheduledMealRepository(DbContext context) : base(context)
+        private readonly ApplicationContext _context;
+        private readonly IMapper _mapper;
+        public ScheduledMealRepository(ApplicationContext context, IMapper mapper) : base(context)
         {
             _context = context;
-            _set = context.Set<ScheduledMeal>();
+            _mapper = mapper;
         }
         
-        public async Task<IEnumerable<ScheduledMeal>> GetScheduledMealsAsync(int userId)
+        public async Task<IEnumerable<ScheduledMealDto>> GetScheduledMealsAsync(int userId)
         {
-            var result = _set.Where(e => e.UserId == userId).Include(e => e.Meal).ToListAsync();
-            return await result;
+            var meals =await _context
+                .ScheduledMeals
+                .Where(e => e.UserId == userId)
+                .Include(e => e.Meal)
+                .ToListAsync();
+            var mealsDto = _mapper.Map<IEnumerable<ScheduledMealDto>>(meals);
+            return mealsDto;
         }
         
-
-        public async Task<ScheduledMeal> ScheduleMeal(int userId, int mealId, DateTime date)
+        public async Task<ScheduledMealDto> ScheduleMeal(int userId, int mealId, DateTime date)
         {
-            var meal = await _context.Set<Meal>().FirstOrDefaultAsync(e => e.Id == mealId);
+            var meal = await _context
+                .Set<Meal>()
+                .FirstOrDefaultAsync(e => e.Id == mealId);
             var scheduledMeal = new ScheduledMeal
             {
                 UserId = userId,
                 MealId = mealId,
                 Date = date
             };
-            await _set.AddAsync(scheduledMeal);
-            return scheduledMeal;
+            var addedMeal = await _context
+                .ScheduledMeals
+                .AddAsync(scheduledMeal);
+            await _context.SaveChangesAsync();
+            var addedMealDto = _mapper.Map<ScheduledMealDto>(addedMeal.Entity);
+            return addedMealDto;
         }
 
-        public void RemoveScheduledMeal(int userId, int scheduledMealId)
+        public async Task RemoveScheduledMeal(int userId, int scheduledMealId)
         {
-            var meal = _set.FirstOrDefault(e => e.Id == scheduledMealId);
+            var meal = await _context
+                .ScheduledMeals
+                .FirstOrDefaultAsync(e => e.Id == scheduledMealId && e.UserId == userId);
             if (meal != null)
             {
-                _set.Remove(meal);
+                _context.ScheduledMeals.Remove(meal);
+                await _context.SaveChangesAsync();
             }
-        }
-
-        public new async Task SaveChangesAsync()
-        {
-            await _context.SaveChangesAsync();
         }
     }
 }

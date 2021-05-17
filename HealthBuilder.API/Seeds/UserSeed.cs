@@ -1,9 +1,8 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using DataAccess;
 using HealthBuilder.Core.Entities;
-using HealthBuilder.DataAccess;
+using HealthBuilder.Infrastructure;
 
 namespace HealthBuilder.API.Seeds
 {

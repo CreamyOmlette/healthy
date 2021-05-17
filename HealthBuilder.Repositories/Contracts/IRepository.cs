@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using HealthBuilder.Core.Entities;
 
-namespace HealthBuilder.Repositories
+namespace HealthBuilder.Repositories.Contracts
 {
     public interface IRepository<TEntity> where TEntity: BaseEntity
     {

@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HealthBuilder.Services.Dtos
+namespace HealthBuilder.Infrastructure.Dtos
 {
     public class UserDto
     {
@@ -14,7 +14,7 @@ namespace HealthBuilder.Services.Dtos
         public int Height { get; set; }
         
         [Required]
-        [RegularExpression("[^a-zA-Z0-9]*$", ErrorMessage = "Your password must contain a lower case, upper case and a special character")]
+        [RegularExpression("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$", ErrorMessage = "Your password must contain a lower case, upper case and a special character")]
         public string Password { get; set; }
         
         [Required]

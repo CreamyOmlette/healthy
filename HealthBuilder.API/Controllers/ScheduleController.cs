@@ -1,11 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using HealthBuilder.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
 using HealthBuilder.Services.Contracts;
-using HealthBuilder.Services.Dtos;
 
 namespace HealthBuilder.API.Controllers
 {

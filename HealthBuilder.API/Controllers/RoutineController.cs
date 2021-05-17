@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using HealthBuilder.Infrastructure.Dtos;
 using HealthBuilder.Services.Contracts;
-using HealthBuilder.Services.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthBuilder.API.Controllers

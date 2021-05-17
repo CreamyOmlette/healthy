@@ -5,8 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using HealthBuilder.API;
-using HealthBuilder.DataAccess;
+using HealthBuilder.Infrastructure;
 
 namespace HealthBuilder.API.Extensions
 {

@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HealthBuilder.Core.Entities;
+using HealthBuilder.Infrastructure.Dtos;
 
-namespace HealthBuilder.Repositories
+namespace HealthBuilder.Repositories.Contracts
 {
-    public interface IScheduledRoutineRepository : IRepository<ScheduledRoutine>
+    public interface IScheduledRoutineRepository
     {
-        Task<IEnumerable<ScheduledRoutine>> GetScheduledRoutinesAsync(int userId);
-        Task<ScheduledRoutine> ScheduleRoutineAsync(int userId, int routineId, DateTime date);
-        void RemoveScheduledRoutine(int scheduledRoutineId);
-        Task SaveChangesAsync();
+        Task<IEnumerable<ScheduledRoutineDto>> GetScheduledRoutinesAsync(int userId);
+        Task<ScheduledRoutineDto> ScheduleRoutineAsync(int userId, int routineId, DateTime date);
+        Task RemoveScheduledRoutine(int scheduledRoutineId);
     }
 }

@@ -1,12 +1,16 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HealthBuilder.Core.Entities;
+using HealthBuilder.Infrastructure.Dtos;
 
-namespace HealthBuilder.Repositories
+namespace HealthBuilder.Repositories.Contracts
 {
-    public interface IRoutineRepository : IRepository<Routine>
+    public interface IRoutineRepository
     {
-        public Task<IEnumerable<Routine>> GetAllWithExercises();
-        public Task<Routine> GetWithExercise(int id);
+        public Task<IEnumerable<RoutineDto>> GetAllRoutines();
+        public Task<RoutineDto> GetRoutine(int id);
+        public Task<RoutineDto> CreateRoutine(RoutineDto routineDto);
+        public Task DeleteRoutine(int routineId);
+        public Task<RoutineDto> ChangeRoutine(int routineId, RoutineDto routineDto);
     }
 }

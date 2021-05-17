@@ -2,6 +2,8 @@
 
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
+        <AssemblyName>HealthBuilder.Infrastructure</AssemblyName>
+        <RootNamespace>HealthBuilder.Infrastructure</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,7 +18,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\HealthBuilder.Domain\HealthBuilder.Domain.csproj" />
-      <ProjectReference Include="..\HealthBuilder.Repositories\HealthBuilder.Repositories.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -4,7 +4,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthBuilder.API", "Health
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthBuilder.Domain", "HealthBuilder.Domain\HealthBuilder.Domain.csproj", "{A73069D5-3093-4B17-92FF-D247C061A116}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthBuilder.DataAccess", "HealthBuilder.DataAccess\HealthBuilder.DataAccess.csproj", "{F48C238D-23CB-4BE2-93A9-788F811FD22D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthBuilder.Infrastructure", "HealthBuilder.Infrastructure\HealthBuilder.Infrastructure.csproj", "{F48C238D-23CB-4BE2-93A9-788F811FD22D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthBuilder.Repositories", "HealthBuilder.Repositories\HealthBuilder.Repositories.csproj", "{6A6644E5-E2D9-4C2E-A115-01220302E9FF}"
 EndProject

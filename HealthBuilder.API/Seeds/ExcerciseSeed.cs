@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthBuilder.Core.Entities;
-using HealthBuilder.DataAccess;
+using HealthBuilder.Infrastructure;
 
 namespace HealthBuilder.API.Seeds
 {

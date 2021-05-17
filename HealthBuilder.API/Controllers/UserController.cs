@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using AutoMapper;
-using HealthBuilder.Services.Dtos;
+using HealthBuilder.Infrastructure.Dtos;
 using HealthBuilder.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +24,10 @@ namespace HealthBuilder.API.Controllers
             try
             {
                 var result = await _userService.RegisterUser(userDto);
+                if (result == null)
+                {
+                    throw new ArgumentException("username exists");
+                }
                 return Ok(result);
             }
             catch (ArgumentException e)
@@ -32,5 +35,33 @@ namespace HealthBuilder.API.Controllers
                 return NotFound(e.Message);
             }
         }
-    }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> ChangeUser(int id, string password = null, int height = 0, int weight = 0)
+        {
+            var result = await _userService.ChangeUser(id, password, height, weight);
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            await _userService.DeleteUser(id);
+            return Ok();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUser(int id)
+        {
+            try
+            {
+                var user = await _userService.GetUserById(id);
+                return Ok(user);
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        }
 }

@@ -1,53 +1,57 @@
 using System;
 using System.Threading.Tasks;
 using AutoMapper;
-using HealthBuilder.Core.Entities;
-using HealthBuilder.Repositories;
+using HealthBuilder.Infrastructure.Dtos;
+using HealthBuilder.Repositories.Contracts;
 using HealthBuilder.Services.Contracts;
-using HealthBuilder.Services.Dtos;
 
 namespace HealthBuilder.Services
 {
     public class UserService : IUserService
     {
-        private readonly IRepository<User> _userRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        public UserService(IRepository<User> userRepository, IMapper mapper)
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
             _mapper = mapper;
         }
         public async Task<UserDto> RegisterUser(UserDto userDto)
         {
-            var user = await _userRepository.SingleOrDefaultAsync(e => e.Username.Equals(userDto.Username));
-            if (user != null)
+            var usernameValid = await _userRepository.CheckUsername(userDto.Username);
+            if (!usernameValid)
             {
-                throw new ArgumentException("Username already exists");
+                return null;
             }
-
-            var newUser = new User
-            {
-                Username = userDto.Username,
-                Password = userDto.Password,
-                Height = userDto.Height,
-                Weight = userDto.Weight,
-                DoB = userDto.DoB
-            };
-            var result = await _userRepository.AddAsync(newUser);
-            var dto = _mapper.Map<UserDto>(result);
-            return dto;
+            var result = await _userRepository.CreateUser(userDto);
+            return result;
         }
 
-        public async Task<UserDto> GetUserById(int userId)
+        public async Task<UserDto> GetUserById(int id)
         {
-            var user = await _userRepository.GetByIdAsync(userId);
+            var user = await _userRepository.GetUser(id);
             if (user == null)
             {
                 throw new ArgumentException("User Id not found");
             }
-
             var dto = _mapper.Map<UserDto>(user);
             return dto;
+        }
+
+        public async Task<UserDto> ChangeUser(int id, string password = null, int height = 0, int weight = 0)
+        {
+            var result = await _userRepository.ChangeUser(id, password, height, weight);
+            return result;
+        }
+
+        public async Task DeleteUser(int id)
+        {
+            var user = await _userRepository.GetUser(id);
+            if (user == null)
+            {
+                throw new ArgumentException("User not found");
+            }
+            await _userRepository.DeleteUser(id);
         }
     }
     

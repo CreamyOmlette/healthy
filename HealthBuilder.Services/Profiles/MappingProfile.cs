@@ -1,6 +1,6 @@
 using AutoMapper;
 using HealthBuilder.Core.Entities;
-using HealthBuilder.Services.Dtos;
+using HealthBuilder.Infrastructure.Dtos;
 
 namespace HealthBuilder.Services.Profiles
 {
@@ -8,14 +8,21 @@ namespace HealthBuilder.Services.Profiles
     {
         public MappingProfile()
         {
+            //Domain to Resource
             CreateMap<Routine, RoutineDto>();
-            CreateMap<ScheduledRoutine, ScheduledRoutineDto>();
-
             CreateMap<Meal, MealDto>();
+            CreateMap<ScheduledRoutine, ScheduledRoutineDto>();
             CreateMap<ScheduledMeal, ScheduledMealDto>();
-
             CreateMap<Exercise, ExerciseDto>();
+            CreateMap<User, UserDto>();
+            
+            //Resource to Domain
+            CreateMap<RoutineDto,Routine>();
+            CreateMap<MealDto, Meal>();
+            CreateMap<ScheduledRoutineDto, ScheduledRoutine>();
+            CreateMap<ScheduledMealDto, ScheduledMeal>();
             CreateMap<ExerciseDto, Exercise>();
+            CreateMap<UserDto, User>();
         }
     }
 }

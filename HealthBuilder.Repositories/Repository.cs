@@ -4,8 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using HealthBuilder.Core.Entities;
-using HealthBuilder.Repositories;
-using HealthBuilder.Repositories;
+using HealthBuilder.Infrastructure;
+using HealthBuilder.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthBuilder.Repositories
@@ -13,15 +13,15 @@ namespace HealthBuilder.Repositories
     public class Repository<TEntity>: IRepository<TEntity> where TEntity: BaseEntity
     {
         private readonly DbSet<TEntity> _set;
-        private readonly DbContext _context;
-        public Repository(DbContext context)
+        private readonly ApplicationContext _context;
+        public Repository(ApplicationContext context)
         {
             _context = context;
             _set = context.Set<TEntity>();
         }
         public async Task<TEntity> GetByIdAsync(int id)
         {
-            return await _set.FirstAsync(e => e.Id == id);
+            return await _set.FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()

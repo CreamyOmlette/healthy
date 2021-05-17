@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using HealthBuilder.Services.Dtos;
+using HealthBuilder.Infrastructure.Dtos;
 
 namespace HealthBuilder.Services.Contracts
 {

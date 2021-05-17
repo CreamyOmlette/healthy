@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using HealthBuilder.Core.Entities;
-using HealthBuilder.Repositories;
+using HealthBuilder.Infrastructure.Dtos;
+using HealthBuilder.Repositories.Contracts;
 using HealthBuilder.Services.Contracts;
-using HealthBuilder.Services.Dtos;
 
 namespace HealthBuilder.Services
 {
@@ -21,59 +21,48 @@ namespace HealthBuilder.Services
         }
         public async Task<IEnumerable<RoutineDto>> GetAll()
         {
-            var routines = await _routineRepository.GetAllAsync();
+            var routines = await _routineRepository.GetAllRoutines();
             var result = _mapper.Map<IEnumerable<RoutineDto>>(routines);
             return result;
         }
 
-        public async Task<RoutineDto> Change(int routineId, RoutineDto routine)
+        public async Task<RoutineDto> Change(int routineId, RoutineDto routineDto)
         {
-            var entity = await _routineRepository.GetByIdAsync(routineId);
-            if (entity == null)
+            var routine = await _routineRepository.GetRoutine(routineId);
+            if (routine == null)
             {
                 throw new ArgumentException("Routine not found");
             }
-            entity.Name = routine.Name;
-            entity.Description = routine.Description;
-            entity.Difficulty = routine.Difficulty;
-            await _routineRepository.SaveChangesAsync();
-            var result = _mapper.Map<RoutineDto>(entity);
+
+            var result = await _routineRepository.ChangeRoutine(routineId, routineDto);
             return result;
         }
 
         public async Task<RoutineDto> Create(RoutineDto routineDto)
-        {
-            var routine = new Routine
-            {
-                Name = routineDto.Name,
-                Description = routineDto.Description,
-                Difficulty = routineDto.Difficulty,
-                Exercises = _mapper.Map<List<Exercise>>(routineDto.Exercises)
-            };
-           var result = await _routineRepository.AddAsync(routine);
-           var dto = _mapper.Map<RoutineDto>(result);
-           return dto;
+        { 
+            var result = await _routineRepository.CreateRoutine(routineDto);
+            return result;
         }
 
         public async Task Remove(int routineId)
         {
-            var entity = await _routineRepository.GetByIdAsync(routineId);
+            var entity = await _routineRepository.GetRoutine(routineId);
             if (entity == null)
             {
                 throw new ArgumentException("Routine not found");
             }
-            _routineRepository.Remove(entity);
+            await _routineRepository.DeleteRoutine(routineId);
         }
 
         public async Task<RoutineDto> GetById(int routineId)
         {
-            var entity = await _routineRepository.GetWithExercise(routineId);
-            if (entity == null)
+            var routine = await _routineRepository.GetRoutine(routineId);
+            if (routine == null)
             {
                 throw new ArgumentException("Routine not found");
             }
 
-            return _mapper.Map<RoutineDto>(entity);
+            return routine;
         }
     }
 }

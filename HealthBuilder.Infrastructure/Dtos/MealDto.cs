@@ -1,12 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace HealthBuilder.Services.Dtos
+namespace HealthBuilder.Infrastructure.Dtos
 {
     public class MealDto
     {
+        public int Id { get; set; }
         [Required]
         [MaxLength(50, ErrorMessage = "Name of the meal is too long")]
-        [RegularExpression(@"[^A-Za-z]")]
+        [RegularExpression(@"^[A-Za-z]+$")]
         public string Name { get; set; }
         
         [Required]

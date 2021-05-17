@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HealthBuilder.Core.Entities;
+using HealthBuilder.Infrastructure.Dtos;
 
-namespace HealthBuilder.Repositories
+namespace HealthBuilder.Repositories.Contracts
 {
-    public interface IScheduledMealRepository : IRepository<ScheduledMeal>
+    public interface IScheduledMealRepository
     {
-        Task<IEnumerable<ScheduledMeal>> GetScheduledMealsAsync(int userId);
-        Task<ScheduledMeal> ScheduleMeal(int userId, int mealId, DateTime date);
-        void RemoveScheduledMeal(int userId, int scheduledMealId);
-        new Task SaveChangesAsync();
+        Task<IEnumerable<ScheduledMealDto>> GetScheduledMealsAsync(int userId);
+        Task<ScheduledMealDto> ScheduleMeal(int userId, int mealId, DateTime date);
+        Task RemoveScheduledMeal(int userId, int scheduledMealId);
     }
 }

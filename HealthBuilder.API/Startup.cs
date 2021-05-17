@@ -1,14 +1,12 @@
-using System.Reflection;
-using AutoMapper;
 using HealthBuilder.Repositories;
 using HealthBuilder.Core.Entities;
-using HealthBuilder.DataAccess;
+using HealthBuilder.Infrastructure;
+using HealthBuilder.Repositories.Contracts;
 using HealthBuilder.Services;
 using HealthBuilder.Services.Contracts;
 using HealthBuilder.Services.Profiles;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -59,10 +57,14 @@ namespace HealthBuilder.API
 
             services.AddScoped<IRoutineRepository, RoutineRepository>();
 
+            services.AddScoped<IMealRepository, MealRepository>();
+            
+            services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<IScheduledActivityRepository, ScheduledActivityRepository>();
+
             services.AddAutoMapper(typeof(MappingProfile));
-            
-            
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication", Version = "v1" });
@@ -82,7 +84,7 @@ namespace HealthBuilder.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

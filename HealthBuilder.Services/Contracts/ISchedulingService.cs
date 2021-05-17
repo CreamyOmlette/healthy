@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using HealthBuilder.Core.Entities;
-using HealthBuilder.Services.Dtos;
+using HealthBuilder.Infrastructure.Dtos;
 
 namespace HealthBuilder.Services.Contracts
 {

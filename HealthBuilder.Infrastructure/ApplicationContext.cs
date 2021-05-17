@@ -2,7 +2,7 @@ using System.Reflection;
 using HealthBuilder.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace HealthBuilder.DataAccess
+namespace HealthBuilder.Infrastructure
 {
     public class ApplicationContext : DbContext
     {
@@ -10,7 +10,11 @@ namespace HealthBuilder.DataAccess
         public DbSet<Routine> Routines { get; set; }
         public DbSet<User> Users { get; set; }
         
-        public DbSet<ScheduledActivity> ScheduledActivity { get; set; }
+        public DbSet<ScheduledActivity> ScheduledActivities { get; set; }
+        
+        public DbSet<ScheduledRoutine> ScheduledRoutines { get; set; }
+        
+        public DbSet<ScheduledMeal> ScheduledMeals { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Muscle> Muscles { get; set; }
 

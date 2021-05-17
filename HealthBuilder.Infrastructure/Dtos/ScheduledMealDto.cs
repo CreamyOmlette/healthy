@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HealthBuilder.Services.Dtos
+namespace HealthBuilder.Infrastructure.Dtos
 {
     public class ScheduledMealDto
     {

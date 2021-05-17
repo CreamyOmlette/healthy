@@ -639,20 +639,6 @@
         "runtime": {
           "bin/placeholder/HealthBuilder.Domain.dll": {}
         }
-      },
-      "HealthBuilder.Repositories/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v5.0",
-        "dependencies": {
-          "HealthBuilder.Domain": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "6.0.0-preview.3.21201.2"
-        },
-        "compile": {
-          "bin/placeholder/HealthBuilder.Repositories.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/HealthBuilder.Repositories.dll": {}
-        }
       }
     }
   },
@@ -1963,18 +1949,12 @@
       "type": "project",
       "path": "../HealthBuilder.Domain/HealthBuilder.Domain.csproj",
       "msbuildProject": "../HealthBuilder.Domain/HealthBuilder.Domain.csproj"
-    },
-    "HealthBuilder.Repositories/1.0.0": {
-      "type": "project",
-      "path": "../HealthBuilder.Repositories/HealthBuilder.Repositories.csproj",
-      "msbuildProject": "../HealthBuilder.Repositories/HealthBuilder.Repositories.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "AutoMapper >= 10.1.1",
       "HealthBuilder.Domain >= 1.0.0",
-      "HealthBuilder.Repositories >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 6.0.0-preview.3.21201.2",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.0-preview.3.21201.2",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.0-preview.3.21201.2"
@@ -1986,11 +1966,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/HealthBuilder.DataAccess.csproj",
-      "projectName": "HealthBuilder.DataAccess",
-      "projectPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/HealthBuilder.DataAccess.csproj",
+      "projectUniqueName": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Infrastructure/HealthBuilder.Infrastructure.csproj",
+      "projectName": "HealthBuilder.Infrastructure",
+      "projectPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Infrastructure/HealthBuilder.Infrastructure.csproj",
       "packagesPath": "/Users/alexlipceanu/.nuget/packages/",
-      "outputPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.DataAccess/obj/",
+      "outputPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Infrastructure/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/alexlipceanu/.nuget/NuGet/NuGet.Config"
@@ -2007,9 +1987,6 @@
           "projectReferences": {
             "/Users/alexlipceanu/Redesign/src/HealthBuilder.Domain/HealthBuilder.Domain.csproj": {
               "projectPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Domain/HealthBuilder.Domain.csproj"
-            },
-            "/Users/alexlipceanu/Redesign/src/HealthBuilder.Repositories/HealthBuilder.Repositories.csproj": {
-              "projectPath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Repositories/HealthBuilder.Repositories.csproj"
             }
           }
         }
