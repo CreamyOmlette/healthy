@@ -5,8 +5,7 @@ namespace HealthBuilder.Infrastructure.Dtos
 {
     public class ScheduledRoutineDto
     {
-        [Required]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         [Required]
         public RoutineDto Routine { get; set; }
         

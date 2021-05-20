@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 using HealthBuilder.Infrastructure.Dtos;
 using HealthBuilder.Services.Contracts;
@@ -11,7 +10,6 @@ namespace HealthBuilder.API.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-
         public UserController(IUserService userService)
         {
             _userService = userService;
@@ -21,25 +19,28 @@ namespace HealthBuilder.API.Controllers
         [Route("")]
         public async Task<IActionResult> RegisterUser(UserDto userDto)
         {
-            try
-            {
-                var result = await _userService.RegisterUser(userDto);
-                if (result == null)
-                {
-                    throw new ArgumentException("username exists");
-                }
-                return Ok(result);
-            }
-            catch (ArgumentException e)
-            {
-                return NotFound(e.Message);
-            }
+             var result = await _userService.RegisterUser(userDto);
+             return Ok(result);
         }
 
-        [HttpPatch("{id}")]
-        public async Task<IActionResult> ChangeUser(int id, string password = null, int height = 0, int weight = 0)
+        [HttpPatch("{id}/dob")]
+        public async Task<IActionResult> UpdateUsersDateOfBirth(int id, DoBDto dateOfBirthDto)
         {
-            var result = await _userService.ChangeUser(id, password, height, weight);
+            var result = await _userService.UpdateDateOfBirth(id, dateOfBirthDto);
+            return Ok(result);
+        }
+        
+        [HttpPatch("{id}/specification")]
+        public async Task<IActionResult> UpdateUsersDateOfBirth(int id, SpecificationDto specificationDto)
+        {
+            var result = await _userService.UpdateSpecification(id, specificationDto);
+            return Ok(result);
+        }
+        
+        [HttpPatch("{id}/password")]
+        public async Task<IActionResult> UpdateUsersDateOfBirth(int id, PasswordDto passwordDto)
+        {
+            var result = await _userService.UpdatePassword(id, passwordDto);
             return Ok(result);
         }
 
@@ -53,15 +54,8 @@ namespace HealthBuilder.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
-            try
-            {
-                var user = await _userService.GetUserById(id);
-                return Ok(user);
-            }
-            catch (ArgumentException e)
-            {
-                return BadRequest(e.Message);
-            }
+            var user = await _userService.GetUserById(id); 
+            return Ok(user);
         }
-        }
+    }
 }

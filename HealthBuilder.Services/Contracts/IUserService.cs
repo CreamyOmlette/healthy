@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using HealthBuilder.Core.Entities;
 using HealthBuilder.Infrastructure.Dtos;
 
 namespace HealthBuilder.Services.Contracts
@@ -8,7 +7,9 @@ namespace HealthBuilder.Services.Contracts
     {
         public Task<UserDto> RegisterUser(UserDto userDto);
         public Task<UserDto> GetUserById(int id);
-        public Task<UserDto> ChangeUser(int id, string password = null, int height = 0, int weight = 0);
+        public Task<UserDto> UpdatePassword(int id, PasswordDto passwordDto);
+        public Task<UserDto> UpdateSpecification(int id, SpecificationDto specificationDto);
+        public Task<UserDto> UpdateDateOfBirth(int id, DoBDto dateOfBirth);
         public Task DeleteUser(int id);
     }
 }

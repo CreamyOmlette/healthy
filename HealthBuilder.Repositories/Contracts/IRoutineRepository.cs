@@ -11,6 +11,6 @@ namespace HealthBuilder.Repositories.Contracts
         public Task<RoutineDto> GetRoutine(int id);
         public Task<RoutineDto> CreateRoutine(RoutineDto routineDto);
         public Task DeleteRoutine(int routineId);
-        public Task<RoutineDto> ChangeRoutine(int routineId, RoutineDto routineDto);
+        public Task<RoutineDto> UpdateRoutine(int routineId, RoutineDto routineDto);
     }
 }

@@ -15,6 +15,7 @@ namespace HealthBuilder.Services.Profiles
             CreateMap<ScheduledMeal, ScheduledMealDto>();
             CreateMap<Exercise, ExerciseDto>();
             CreateMap<User, UserDto>();
+            CreateMap<ScheduledActivity, ScheduledActivityDto>();
             
             //Resource to Domain
             CreateMap<RoutineDto,Routine>();
@@ -23,6 +24,7 @@ namespace HealthBuilder.Services.Profiles
             CreateMap<ScheduledMealDto, ScheduledMeal>();
             CreateMap<ExerciseDto, Exercise>();
             CreateMap<UserDto, User>();
+            CreateMap<ScheduledActivityDto, ScheduledActivity>();
         }
     }
 }

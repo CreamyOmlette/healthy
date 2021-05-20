@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mime;
 using System.Threading.Tasks;
 using AutoMapper;
 using HealthBuilder.Core.Entities;
@@ -38,6 +37,10 @@ namespace HealthBuilder.Repositories
                 .Routines
                 .Include(e => e.Exercises)
                 .FirstOrDefaultAsync(e => e.Id == id);
+            if (routine == null)
+            {
+                return null;
+            }
             var routineDto = _mapper.Map<RoutineDto>(routine);
             return routineDto;
         }
@@ -45,17 +48,19 @@ namespace HealthBuilder.Repositories
         public async Task<RoutineDto> CreateRoutine(RoutineDto routineDto)
         {
             var routine = _mapper.Map<Routine>(routineDto);
-            var ids = routineDto.Exercises.Select(e => e.Id).ToList();
             routine.Exercises = new List<Exercise>();
-            var exercises = _context.Exercises.Where(e => ids.Contains(e.Id));
-            foreach (var exercise in exercises)
+            var ids = routineDto.Exercises.Select(e => e.Id);
+            var exerciseDb = _context.Exercises.Select(e => e.Id).ToList();
+            foreach (var id in ids)
             {
-                routine.Exercises.Add(exercise);
+                if(exerciseDb.Contains(id))
+                    routine.Exercises.Add(await _context.Exercises.FirstOrDefaultAsync(e => e.Id == id));
             }
-            var result = await AddAsync(routine);
+
+            await _context.Routines.AddAsync(routine);
             await _context.SaveChangesAsync();
-            var resultDto = _mapper.Map<RoutineDto>(result);
-            return resultDto;
+            var dto = _mapper.Map<RoutineDto>(routine);
+            return dto;
         }
 
         public async Task DeleteRoutine(int routineId)
@@ -70,11 +75,22 @@ namespace HealthBuilder.Repositories
             }
         }
 
-        public async Task<RoutineDto> ChangeRoutine(int routineId, RoutineDto routineDto)
+        public async Task<RoutineDto> UpdateRoutine(int routineId, RoutineDto routineDto)
         {
-            var routine = _mapper.Map<Routine>(routineDto);
-            routine.Id = routineId;
-            _context.Remove(routine);
+            var routine = await GetByIdAsync(routineId);
+            routine.Name = routineDto.Name;
+            routine.Description = routineDto.Description;
+            routine.Difficulty = routineDto.Difficulty;
+            routine.Exercises = new List<Exercise>();
+            var ids = routineDto.Exercises.Select(e => e.Id);
+            var exerciseDb = _context.Exercises.Select(e => e.Id).ToList();
+            foreach (var id in ids)
+            {
+                if(exerciseDb.Contains(id))
+                    routine.Exercises.Add(await _context.Exercises.FirstOrDefaultAsync(e => e.Id == id));
+            }
+
+            _context.Routines.Update(routine);
             await _context.SaveChangesAsync();
             var dto = _mapper.Map<RoutineDto>(routine);
             return dto;

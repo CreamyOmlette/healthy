@@ -12,6 +12,6 @@ namespace HealthBuilder.Repositories.Contracts
         public Task<MealDto> GetMeal(int mealId);
         public Task<IEnumerable<MealDto>> GetAllMeals();
         public Task DeleteMeal(int mealId);
-        public Task<MealDto> ChangeMeal(MealDto mealDto);
+        public Task<MealDto> UpdateMeal(MealDto mealDto);
     }
 }

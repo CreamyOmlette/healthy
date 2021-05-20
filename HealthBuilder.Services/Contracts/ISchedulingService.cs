@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using HealthBuilder.Core.Entities;
 using HealthBuilder.Infrastructure.Dtos;
 
 namespace HealthBuilder.Services.Contracts
@@ -12,6 +14,8 @@ namespace HealthBuilder.Services.Contracts
         public Task RemoveScheduledActivity(int userId, int activityId);
         public Task<IEnumerable<ScheduledMealDto>> GetAllScheduledMeals(int userId);
         public Task<IEnumerable<ScheduledRoutineDto>> GetAllScheduledRoutines(int userId);
+        public Task<ScheduledActivityDto> GetScheduledActivity(int userId, int activityId);
+        public Task<ScheduledActivityDto> UpdateScheduledActivityStatus(int userId, int activityId, bool status);
 
     }
 }

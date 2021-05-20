@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -11,17 +12,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HealthBuilder.Repositories
 {
-    public class ScheduledMealRepository : Repository<ScheduledMeal>, IScheduledMealRepository
+    public class ScheduledMealRepository : ScheduledActivityRepository<ScheduledMeal>, IScheduledMealRepository
     {
         private readonly ApplicationContext _context;
         private readonly IMapper _mapper;
-        public ScheduledMealRepository(ApplicationContext context, IMapper mapper) : base(context)
+        public ScheduledMealRepository(ApplicationContext context, IMapper mapper) : base(context, mapper)
         {
             _context = context;
             _mapper = mapper;
         }
         
-        public async Task<IEnumerable<ScheduledMealDto>> GetScheduledMealsAsync(int userId)
+        public async Task<IEnumerable<ScheduledMealDto>> GetAllScheduledMeals(int userId)
         {
             var meals =await _context
                 .ScheduledMeals
@@ -32,7 +33,7 @@ namespace HealthBuilder.Repositories
             return mealsDto;
         }
         
-        public async Task<ScheduledMealDto> ScheduleMeal(int userId, int mealId, DateTime date)
+        public async Task<ScheduledMealDto> CreateScheduledMeal(int userId, int mealId, DateTime date)
         {
             var meal = await _context
                 .Set<Meal>()
@@ -51,16 +52,16 @@ namespace HealthBuilder.Repositories
             return addedMealDto;
         }
 
-        public async Task RemoveScheduledMeal(int userId, int scheduledMealId)
+        public async Task<ScheduledMealDto> GetScheduledMeal(int userId, int activityId)
         {
-            var meal = await _context
-                .ScheduledMeals
-                .FirstOrDefaultAsync(e => e.Id == scheduledMealId && e.UserId == userId);
-            if (meal != null)
+            var meal = await _context.ScheduledMeals.FirstOrDefaultAsync(e => e.Id == activityId);
+            if (meal == null)
             {
-                _context.ScheduledMeals.Remove(meal);
-                await _context.SaveChangesAsync();
+                return null;
             }
+            
+            var dto = _mapper.Map<ScheduledMealDto>(meal);
+            return dto;
         }
     }
 }

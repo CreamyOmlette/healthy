@@ -1,10 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using HealthBuilder.Infrastructure.Dtos;
+using HealthBuilder.Infrastructure.Exceptions;
 using HealthBuilder.Repositories.Contracts;
 using HealthBuilder.Services.Contracts;
+using Microsoft.Extensions.Logging;
 
 namespace HealthBuilder.Services
 {
@@ -12,11 +13,13 @@ namespace HealthBuilder.Services
     {
         private readonly IMealRepository _mealRepository;
         private readonly IMapper _mapper;
-        
-        public MealService(IMealRepository mealRepository, IMapper mapper)
+        private readonly ILogger<MealService> _logger;
+
+        public MealService(IMealRepository mealRepository, IMapper mapper, ILogger<MealService> logger)
         {
             _mealRepository = mealRepository;
             _mapper = mapper;
+            _logger = logger;
         }
         public async Task<IEnumerable<MealDto>> GetAll()
         {
@@ -25,30 +28,31 @@ namespace HealthBuilder.Services
             return dto;
         }
 
-        public async Task<MealDto> Change(int mealId, MealDto meal) // For Change
+        public async Task<MealDto> UpdateMeal(int mealId, MealDto meal)
         {
             var myMeal = await _mealRepository.GetMeal(mealId);
             if (myMeal == null)
             {
-                throw new ArgumentException("Meal doesnt Exist");
+                _logger.LogInformation("Error while changing a meal");
+                throw new MealNotFoundException();
             }
-
-            var result = await _mealRepository.ChangeMeal(meal);
+            var result = await _mealRepository.UpdateMeal(meal);
             return result;
         }
 
-        public async Task<MealDto> Create(MealDto mealDto)
+        public async Task<MealDto> CreateMeal(MealDto mealDto)
         {
             var result = await _mealRepository.CreateMeal(mealDto);
             return result;
         }
 
-        public async Task Remove(int mealId)
+        public async Task RemoveMeal(int mealId)
         {
             var meal = await _mealRepository.GetMeal(mealId);
             if (meal == null)
             {
-                throw new ArgumentException("Meal doesnt exist");
+                _logger.LogInformation("Error while deleting a meal");
+                throw new MealNotFoundException();
             }
             await _mealRepository.DeleteMeal(mealId);
         }
@@ -56,13 +60,7 @@ namespace HealthBuilder.Services
         public async Task<MealDto> GetById(int mealId)
         {
             var meal = await _mealRepository.GetMeal(mealId);
-            if (meal == null)
-            {
-                throw new ArgumentException("Meal doesnt exist");
-            }
-
-            var dto = _mapper.Map<MealDto>(meal);
-            return dto;
+            return meal;
         }
     }
 }

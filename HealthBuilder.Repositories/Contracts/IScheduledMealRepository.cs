@@ -6,10 +6,10 @@ using HealthBuilder.Infrastructure.Dtos;
 
 namespace HealthBuilder.Repositories.Contracts
 {
-    public interface IScheduledMealRepository
+    public interface IScheduledMealRepository : IScheduledActivityRepository
     {
-        Task<IEnumerable<ScheduledMealDto>> GetScheduledMealsAsync(int userId);
-        Task<ScheduledMealDto> ScheduleMeal(int userId, int mealId, DateTime date);
-        Task RemoveScheduledMeal(int userId, int scheduledMealId);
+        Task<IEnumerable<ScheduledMealDto>> GetAllScheduledMeals(int userId);
+        Task<ScheduledMealDto> CreateScheduledMeal(int userId, int mealId, DateTime date);
+        Task<ScheduledMealDto> GetScheduledMeal(int userId, int activityId);
     }
 }

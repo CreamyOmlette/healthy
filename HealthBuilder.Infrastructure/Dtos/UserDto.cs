@@ -1,10 +1,12 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using HealthBuilder.Infrastructure.Dtos.Attributes;
 
 namespace HealthBuilder.Infrastructure.Dtos
 {
     public class UserDto
     {
+        public int? Id { get; set; }
         [Required]
         [StringLength(25, MinimumLength = 4, ErrorMessage = "Username must contain more than 4 symbols")]
         public string Username { get; set; }
@@ -25,12 +27,5 @@ namespace HealthBuilder.Infrastructure.Dtos
         [MyDoB(ErrorMessage = "Date of birth is invalid")]
         public DateTime DoB { get; set; }
     }
-    public class MyDoBAttribute : ValidationAttribute
-    {
-        public override bool IsValid(object value)// Return a boolean value: true == IsValid, false != IsValid
-        {
-            DateTime d = Convert.ToDateTime(value);
-            return d < DateTime.Now; //Dates Less than or equal to today are valid (true)
-        }
-    }
+    
 }

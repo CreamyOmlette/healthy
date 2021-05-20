@@ -5,8 +5,7 @@ namespace HealthBuilder.Infrastructure.Dtos
 {
     public class ScheduledMealDto
     {
-        [Required]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         
         [Required] 
         public MealDto Meal { get; set; }

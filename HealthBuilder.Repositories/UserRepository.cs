@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -19,6 +20,59 @@ namespace HealthBuilder.Repositories
             _mapper = mapper;
         }
 
+        public async Task<UserDto> UpdatePassword(int id, string password)
+        {
+            var user = await GetByIdAsync(id);
+            if (user == null)
+            {
+                return null;
+            }
+            
+            user.Password = password;
+            _context.Update(user);
+            await _context.SaveChangesAsync();
+            var dto = _mapper.Map<UserDto>(user);
+            return dto;
+        }
+
+        public async Task<UserDto> UpdateSpecification(int id, SpecificationDto specificationDto)
+        {
+            var user = await GetByIdAsync(id);
+            if (user == null)
+            {
+                return null;
+            }
+
+            if (specificationDto.Height != null)
+            {
+                user.Height = (int)specificationDto.Height;
+            }
+
+            if (specificationDto.Weight != null)
+            {
+                user.Weight = (int)specificationDto.Weight;
+            }
+
+            _context.Update(user);
+            await _context.SaveChangesAsync();
+            var dto = _mapper.Map<UserDto>(user);
+            return dto;
+        }
+
+        public async Task<UserDto> UpdateDoB(int id, DateTime dateOfBirth)
+        {
+            var user = await GetByIdAsync(id);
+            if (user == null)
+            {
+                return null;
+            }
+            user.DoB = dateOfBirth;
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+            var userDto = _mapper.Map<UserDto>(user);
+            return userDto;
+        }
+
         public async Task<UserDto> CreateUser(UserDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
@@ -28,29 +82,7 @@ namespace HealthBuilder.Repositories
             return dto;
         }
 
-        public async Task<UserDto> ChangeUser(int id, string password = null, int height = 0, int weight = 0)
-        {
-            var user = await GetByIdAsync(id);
-            if (password != null)
-            {
-                user.Password = password;
-            }
-            if (height != 0)
-            {
-                user.Height = height;
-            }
-            if (weight != 0)
-            {
-                user.Weight = weight;
-            }
-            
-            var userDto = _mapper.Map<UserDto>(user);
-            _context.Users.Update(user);
-            await _context.SaveChangesAsync();
-            return userDto;
-        }
-
-        public async Task<bool> CheckUsername(string username)
+        public async Task<bool> IfValid(string username)
         {
             var valid = !(await GetAllAsync()).Any(e => e.Username.Equals(username));
             return valid;
@@ -63,6 +95,7 @@ namespace HealthBuilder.Repositories
             {
                 return null;
             }
+            
             var dto = _mapper.Map<UserDto>(user);
             return dto;
         }

@@ -8,9 +8,9 @@ namespace HealthBuilder.Services.Contracts
     public interface IMealService
     {
         public Task<IEnumerable<MealDto>> GetAll();
-        public Task<MealDto> Change(int mealId, MealDto meal);
-        public Task<MealDto> Create(MealDto mealDto);
-        public Task Remove(int mealId);
+        public Task<MealDto> UpdateMeal(int mealId, MealDto meal);
+        public Task<MealDto> CreateMeal(MealDto mealDto);
+        public Task RemoveMeal(int mealId);
         public Task<MealDto> GetById(int mealId);
     }
 }

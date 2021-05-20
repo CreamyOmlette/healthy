@@ -34,6 +34,10 @@ namespace HealthBuilder.Repositories
         public async Task<MealDto> GetMeal(int mealId)
         {
             var meal = await _context.Meals.FirstOrDefaultAsync(e => e.Id == mealId);
+            if (meal == null)
+            {
+                return null;
+            }
             var dto = _mapper.Map<MealDto>(meal);
             return dto;
         }
@@ -56,7 +60,7 @@ namespace HealthBuilder.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<MealDto> ChangeMeal(MealDto mealDto)
+        public async Task<MealDto> UpdateMeal(MealDto mealDto)
         {
             var meal = _mapper.Map<Meal>(mealDto);
             var result = await Task.Run(() => _context.Update(meal));

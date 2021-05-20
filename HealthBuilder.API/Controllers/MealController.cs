@@ -22,44 +22,41 @@ namespace HealthBuilder.API.Controllers
 
         [HttpGet("")]
         public async Task<IActionResult> GetAllMeals()
-        {
-            try
+        { 
+            var result = await _mealService.GetAll();
+            return Ok(result);
+        }
+        
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetMealById(int id)
+        { 
+            var result = await _mealService.GetById(id);
+            if (result == null)
             {
-                var result = await _mealService.GetAll();
-                return Ok(result);
+                return NotFound();
             }
-            catch (ArgumentException e)
-            {
-                return BadRequest(e.Message);
-            }
+            return Ok(result);
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateMeal(MealDto mealDto)
         {
-            try
-            {
-                var result = await _mealService.Create(mealDto);
-                return Ok(result);
-            }
-            catch(ArgumentException e)
-            {
-                return BadRequest(e.Message);
-            }
+            var result = await _mealService.CreateMeal(mealDto); 
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveMeal(int id)
         {
-            try
-            {
-                await _mealService.Remove(id);
-                return Ok();
-            }
-            catch (ArgumentException e)
-            {
-                return BadRequest(e.Message);
-            }
+           await _mealService.RemoveMeal(id);
+           return Ok();
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdateMeal(int id, MealDto mealDto)
+        {
+            var result = await _mealService.UpdateMeal(id, mealDto);
+            return Ok();
         }
     }
 }

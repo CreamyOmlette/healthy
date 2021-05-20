@@ -11,17 +11,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HealthBuilder.Repositories
 {
-    public class ScheduledRoutineRepository: Repository<ScheduledRoutine>, IScheduledRoutineRepository
+    public class ScheduledRoutineRepository: ScheduledActivityRepository<ScheduledRoutine>, IScheduledRoutineRepository
     {
         private readonly ApplicationContext _context;
         private readonly IMapper _mapper;
-        public ScheduledRoutineRepository(ApplicationContext context, IMapper mapper) : base(context)
+        public ScheduledRoutineRepository(ApplicationContext context, IMapper mapper) : base(context, mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ScheduledRoutineDto>> GetScheduledRoutinesAsync(int userId)
+        public async Task<IEnumerable<ScheduledRoutineDto>> GetAllScheduledRoutines(int userId)
         {
             var routines = await _context
                 .ScheduledRoutines
@@ -32,7 +32,7 @@ namespace HealthBuilder.Repositories
             return routinesDto;
         }
 
-        public async Task<ScheduledRoutineDto> ScheduleRoutineAsync(int userId, int routineId, DateTime date)
+        public async Task<ScheduledRoutineDto> CreateScheduledRoutine(int userId, int routineId, DateTime activityDate)
         {
             var routine = await _context
                 .Routines
@@ -41,7 +41,7 @@ namespace HealthBuilder.Repositories
             {
                 UserId = userId,
                 RoutineId = routineId,
-                Date = date
+                Date = activityDate
             };
             var addedScheduledRoutine = await AddAsync(result);
             await _context.SaveChangesAsync();
@@ -49,15 +49,16 @@ namespace HealthBuilder.Repositories
             return dto;
         }
 
-        public async Task RemoveScheduledRoutine(int scheduledRoutineId)
+        public async Task<ScheduledRoutineDto> GetScheduledRoutine(int userId, int activityId)
         {
-            var routine = await _context
-                .ScheduledRoutines
-                .FirstOrDefaultAsync(e => e.Id == scheduledRoutineId);
-            if (routine != null)
-            {
-                _context.ScheduledRoutines.Remove(routine);
-            }
+            var routine = await _context.ScheduledRoutines.FirstOrDefaultAsync(e => e.Id == activityId);
+                if (routine == null)
+                {
+                    return null;
+                }
+                
+                var dto = _mapper.Map<ScheduledRoutineDto>(routine);
+                return dto;
         }
     }
 }

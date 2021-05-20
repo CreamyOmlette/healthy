@@ -1,12 +1,13 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using HealthBuilder.Core.Entities;
 using HealthBuilder.Infrastructure.Dtos;
+using HealthBuilder.Infrastructure.Exceptions;
 using HealthBuilder.Repositories.Contracts;
 using HealthBuilder.Services.Contracts;
+using Microsoft.Extensions.Logging;
 
 namespace HealthBuilder.Services
 {
@@ -14,10 +15,15 @@ namespace HealthBuilder.Services
     {
         private readonly IRoutineRepository _routineRepository;
         private readonly IMapper _mapper;
-        public RoutineService(IRoutineRepository routineRepository, IMapper mapper)
+        private readonly ILogger<RoutineService> _logger;
+        private readonly IExerciseRepository _exerciseRepository;
+        public RoutineService(IRoutineRepository routineRepository,
+            IExerciseRepository exerciseRepository, IMapper mapper, ILogger<RoutineService> logger)
         {
             _routineRepository = routineRepository;
+            _exerciseRepository = exerciseRepository;
             _mapper = mapper;
+            _logger = logger;
         }
         public async Task<IEnumerable<RoutineDto>> GetAll()
         {
@@ -26,20 +32,31 @@ namespace HealthBuilder.Services
             return result;
         }
 
-        public async Task<RoutineDto> Change(int routineId, RoutineDto routineDto)
+        public async Task<RoutineDto> UpdateRoutine(int routineId, RoutineDto routineDto)
         {
             var routine = await _routineRepository.GetRoutine(routineId);
             if (routine == null)
             {
-                throw new ArgumentException("Routine not found");
+                _logger.LogInformation("Error while changing a Routine");
+                throw new Exception("Routine not found");
             }
 
-            var result = await _routineRepository.ChangeRoutine(routineId, routineDto);
+            var result = await _routineRepository.UpdateRoutine(routineId, routineDto);
             return result;
         }
 
-        public async Task<RoutineDto> Create(RoutineDto routineDto)
-        { 
+        public async Task<RoutineDto> CreateRoutine(RoutineDto routineDto)
+        {
+            var exercises = routineDto.Exercises;
+            var validIds = (await _exerciseRepository.GetValidIds()).ToList();
+            foreach (var exercise in exercises)
+            {
+                if (!validIds.Contains(exercise.Id))
+                {
+                    _logger.LogInformation("Error while creating a Routine");
+                    throw new ExerciseNotFoundException();
+                }
+            }
             var result = await _routineRepository.CreateRoutine(routineDto);
             return result;
         }
@@ -49,7 +66,8 @@ namespace HealthBuilder.Services
             var entity = await _routineRepository.GetRoutine(routineId);
             if (entity == null)
             {
-                throw new ArgumentException("Routine not found");
+                _logger.LogInformation("Error while deleting a Routine");
+                throw new RoutineNotFoundException();
             }
             await _routineRepository.DeleteRoutine(routineId);
         }
@@ -57,11 +75,6 @@ namespace HealthBuilder.Services
         public async Task<RoutineDto> GetById(int routineId)
         {
             var routine = await _routineRepository.GetRoutine(routineId);
-            if (routine == null)
-            {
-                throw new ArgumentException("Routine not found");
-            }
-
             return routine;
         }
     }

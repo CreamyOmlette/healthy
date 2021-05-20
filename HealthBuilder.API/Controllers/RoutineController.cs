@@ -1,6 +1,4 @@
-using System;
 using System.Threading.Tasks;
-using AutoMapper;
 using HealthBuilder.Infrastructure.Dtos;
 using HealthBuilder.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
@@ -12,25 +10,16 @@ namespace HealthBuilder.API.Controllers
     public class RoutineController : ControllerBase
     {
         private readonly IRoutineService _routineService;
-        private readonly IMapper _mapper;
-        public RoutineController(IRoutineService routineService, IMapper mapper)
+        public RoutineController(IRoutineService routineService)
         {
             _routineService = routineService;
-            _mapper = mapper;
         }
 
         [HttpPost("")]
         public async Task<IActionResult> CreateRoutine(RoutineDto routine)
         {
-            try
-            {
-                var result = await _routineService.Create(routine);
-                return Ok(result);
-            }
-            catch (ArgumentException e)
-            {
-                return BadRequest(e.Message);
-            }
+            var result = await _routineService.CreateRoutine(routine);
+            return Ok(result);
         }
 
         [HttpGet("")]
@@ -43,29 +32,26 @@ namespace HealthBuilder.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            try
+            var result = await _routineService.GetById(id);
+            if (result == null)
             {
-                var result = await _routineService.GetById(id);
-                return Ok(result);
+                return NotFound();
             }
-            catch (ArgumentException e)
-            {
-                return BadRequest(e.Message);
-            }
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveRoutine(int id)
         {
-            try
-            {
-                await _routineService.Remove(id);
-                return Ok();
-            }
-            catch (ArgumentException e)
-            {
-                return BadRequest(e.Message);
-            }
+            await _routineService.Remove(id);
+            return Ok();
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdateRoutine(int id, RoutineDto routineDto)
+        {
+            var result = await _routineService.UpdateRoutine(id, routineDto);
+            return Ok(result);
         }
     }
 }

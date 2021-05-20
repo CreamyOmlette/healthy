@@ -20,8 +20,4 @@
       <ProjectReference Include="..\HealthBuilder.Domain\HealthBuilder.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Profiles" />
-    </ItemGroup>
-
 </Project>

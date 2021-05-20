@@ -1,3 +1,5 @@
+using HealthBuilder.API.Extensions;
+using HealthBuilder.API.Middleware;
 using HealthBuilder.Repositories;
 using HealthBuilder.Core.Entities;
 using HealthBuilder.Infrastructure;
@@ -11,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace HealthBuilder.API
@@ -61,7 +64,9 @@ namespace HealthBuilder.API
             
             services.AddScoped<IUserRepository, UserRepository>();
 
-            services.AddScoped<IScheduledActivityRepository, ScheduledActivityRepository>();
+            services.AddScoped<IScheduledActivityRepository, ScheduledActivityRepository<ScheduledActivity>>();
+
+            services.AddScoped<IExerciseRepository, ExerciseRepository>();
 
             services.AddAutoMapper(typeof(MappingProfile));
 
@@ -72,7 +77,7 @@ namespace HealthBuilder.API
         }
 
         
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
@@ -80,6 +85,8 @@ namespace HealthBuilder.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApplication v1"));
             }
+            
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseHttpsRedirection();
 
