@@ -73,7 +73,7 @@ namespace HealthBuilder.Repositories
             return userDto;
         }
 
-        public async Task<UserDto> CreateUser(UserDto userDto)
+        public async Task<UserDto> CreateUser(UserCreationDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
             var addedUser = await _context.Users.AddAsync(user);

@@ -17,7 +17,7 @@ namespace HealthBuilder.API.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> RegisterUser(UserDto userDto)
+        public async Task<IActionResult> RegisterUser(UserCreationDto userDto)
         {
              var result = await _userService.RegisterUser(userDto);
              return Ok(result);

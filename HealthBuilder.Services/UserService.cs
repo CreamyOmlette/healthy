@@ -20,7 +20,7 @@ namespace HealthBuilder.Services
             _mapper = mapper;
             _logger = logger;
         }
-        public async Task<UserDto> RegisterUser(UserDto userDto)
+        public async Task<UserDto> RegisterUser(UserCreationDto userDto)
         {
             var usernameValid = await _userRepository.IfValid(userDto.Username);
             if (!usernameValid)

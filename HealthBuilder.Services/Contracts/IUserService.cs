@@ -5,7 +5,7 @@ namespace HealthBuilder.Services.Contracts
 {
     public interface IUserService
     {
-        public Task<UserDto> RegisterUser(UserDto userDto);
+        public Task<UserDto> RegisterUser(UserCreationDto userDto);
         public Task<UserDto> GetUserById(int id);
         public Task<UserDto> UpdatePassword(int id, PasswordDto passwordDto);
         public Task<UserDto> UpdateSpecification(int id, SpecificationDto specificationDto);
