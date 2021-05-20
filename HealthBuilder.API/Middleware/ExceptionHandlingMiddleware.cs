@@ -10,6 +10,7 @@ namespace HealthBuilder.API.Middleware
 {
     public class ExceptionHandlingMiddleware
     {
+        //pull
         private readonly RequestDelegate _next;
 
         public ExceptionHandlingMiddleware(RequestDelegate next)
