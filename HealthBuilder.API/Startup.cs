@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
 using HealthBuilder.API.Extensions;
 using HealthBuilder.API.Middleware;
 using HealthBuilder.Repositories;
@@ -7,14 +10,19 @@ using HealthBuilder.Repositories.Contracts;
 using HealthBuilder.Services;
 using HealthBuilder.Services.Contracts;
 using HealthBuilder.Services.Profiles;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace HealthBuilder.API
 {
@@ -35,7 +43,7 @@ namespace HealthBuilder.API
             services.AddDbContext<ApplicationContext>(optionsBuilder => optionsBuilder.
                 UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly("HealthBuilder.API")));
-            
+
             services.AddScoped<DbContext, ApplicationContext>();
             
             services.AddScoped<IRepository<Routine>, Repository<Routine>>();
@@ -68,11 +76,57 @@ namespace HealthBuilder.API
 
             services.AddScoped<IExerciseRepository, ExerciseRepository>();
 
+            services.AddScoped<IUserIdentityService, UserIdentitySevice>();
+
             services.AddAutoMapper(typeof(MappingProfile));
+            
+            // For Identity  
+            services.AddIdentity<UserIdentity, IdentityRole>()  
+                .AddEntityFrameworkStores<ApplicationContext>()  
+                .AddDefaultTokenProviders();  
+  
+            // Adding Authentication  
+            services.AddAuthentication(options =>  
+                {  
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;  
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;  
+                    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;  
+                })
+                // Adding Jwt Bearer  
+                .AddJwtBearer(options =>  
+                {  
+                    options.SaveToken = true;  
+                    options.RequireHttpsMetadata = false;  
+                    options.TokenValidationParameters = new TokenValidationParameters()  
+                    {  
+                        ValidateIssuer = true,  
+                        ValidateAudience = true,  
+                        ValidAudience = Configuration["JWT:ValidAudience"],  
+                        ValidIssuer = Configuration["JWT:ValidIssuer"],  
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))  
+                    };  
+                });
 
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApplication", Version = "v1" });
+                c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows
+                    {
+                        AuthorizationCode = new OpenApiOAuthFlow
+                        {
+                            AuthorizationUrl = new Uri("https://localhost:5000/connect/authorize"),
+                            TokenUrl = new Uri("https://localhost:5000/connect/token"),
+                            Scopes = new Dictionary<string, string>
+                            {
+                                {"api1", "Demo API - full access"}
+                            }
+                        }
+                    }
+                });
+                c.OperationFilter<SecurityRequirementsOperationFilter>();
             });
         }
 
@@ -91,6 +145,8 @@ namespace HealthBuilder.API
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
             
             app.UseAuthorization();
 

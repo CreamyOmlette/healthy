@@ -1,8 +1,23 @@
 {
   "version": 2,
-  "dgSpecHash": "LUBA1z2G289MPfk2rixkBx4hFBW61o7/7VkY2hK2AHTvH0b2n5OeUClgiV3tIb6J462junxey1XiZ4gmVbKCLQ==",
+  "dgSpecHash": "Pv5FEvTLs8Y0I/HwzyV3hL7LIjKardnB3gpJ+v6tzoSRLNJkusl5oY2gVdHtJiEpd9EjHL9Njdh9uEzN0vbOzA==",
   "success": true,
   "projectFilePath": "/Users/alexlipceanu/Redesign/src/HealthBuilder.Domain/HealthBuilder.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/alexlipceanu/.nuget/packages/microsoft.aspnetcore.cryptography.internal/6.0.0-preview.3.21201.13/microsoft.aspnetcore.cryptography.internal.6.0.0-preview.3.21201.13.nupkg.sha512",
+    "/Users/alexlipceanu/.nuget/packages/microsoft.aspnetcore.cryptography.keyderivation/6.0.0-preview.3.21201.13/microsoft.aspnetcore.cryptography.keyderivation.6.0.0-preview.3.21201.13.nupkg.sha512",
+    "/Users/alexlipceanu/.nuget/packages/microsoft.extensions.caching.abstractions/6.0.0-preview.3.21201.4/microsoft.extensions.caching.abstractions.6.0.0-preview.3.21201.4.nupkg.sha512",
+    "/Users/alexlipceanu/.nuget/packages/microsoft.extensions.dependencyinjection/6.0.0-preview.3.21201.4/microsoft.extensions.dependencyinjection.6.0.0-preview.3.21201.4.nupkg.sha512",
+    "/Users/alexlipceanu/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/6.0.0-preview.3.21201.4/microsoft.extensions.dependencyinjection.abstractions.6.0.0-preview.3.21201.4.nupkg.sha512",
+    "/Users/alexlipceanu/.nuget/packages/microsoft.extensions.identity.core/6.0.0-preview.3.21201.13/microsoft.extensions.identity.core.6.0.0-preview.3.21201.13.nupkg.sha512",
+    "/Users/alexlipceanu/.nuget/packages/microsoft.extensions.identity.stores/6.0.0-preview.3.21201.13/microsoft.extensions.identity.stores.6.0.0-preview.3.21201.13.nupkg.sha512",
+    "/Users/alexlipceanu/.nuget/packages/microsoft.extensions.logging/6.0.0-preview.3.21201.4/microsoft.extensions.logging.6.0.0-preview.3.21201.4.nupkg.sha512",
+    "/Users/alexlipceanu/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0-preview.3.21201.4/microsoft.extensions.logging.abstractions.6.0.0-preview.3.21201.4.nupkg.sha512",
+    "/Users/alexlipceanu/.nuget/packages/microsoft.extensions.options/6.0.0-preview.3.21201.4/microsoft.extensions.options.6.0.0-preview.3.21201.4.nupkg.sha512",
+    "/Users/alexlipceanu/.nuget/packages/microsoft.extensions.primitives/6.0.0-preview.3.21201.4/microsoft.extensions.primitives.6.0.0-preview.3.21201.4.nupkg.sha512",
+    "/Users/alexlipceanu/.nuget/packages/system.componentmodel.annotations/6.0.0-preview.3.21201.4/system.componentmodel.annotations.6.0.0-preview.3.21201.4.nupkg.sha512",
+    "/Users/alexlipceanu/.nuget/packages/system.diagnostics.diagnosticsource/6.0.0-preview.3.21201.4/system.diagnostics.diagnosticsource.6.0.0-preview.3.21201.4.nupkg.sha512",
+    "/Users/alexlipceanu/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0-preview.3.21201.4/system.runtime.compilerservices.unsafe.6.0.0-preview.3.21201.4.nupkg.sha512"
+  ],
   "logs": []
 }
