@@ -2,7 +2,9 @@ using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using HealthBuilder.Infrastructure.Dtos;
+using HealthBuilder.Infrastructure.UserRoles;
 using HealthBuilder.Services.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthBuilder.API.Controllers
@@ -37,9 +39,9 @@ namespace HealthBuilder.API.Controllers
             }
             return Ok(result);
         }
-
+        [Authorize(Roles = UserRoles.User)]
         [HttpPost]
-        public async Task<IActionResult> CreateMeal(MealDto mealDto)
+        public async Task<IActionResult> CreateMeal(MealDto mealDto, [FromHeader] string token)
         {
             var result = await _mealService.CreateMeal(mealDto); 
             return Ok(result);

@@ -1,10 +1,12 @@
 using System.Reflection;
 using HealthBuilder.Core.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthBuilder.Infrastructure
 {
-    public class ApplicationContext : DbContext
+    public class ApplicationContext : IdentityDbContext<UserIdentity>
     {
         public DbSet<Meal> Meals { get; set; }
         public DbSet<Routine> Routines { get; set; }
@@ -25,6 +27,7 @@ namespace HealthBuilder.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             builder.Entity<ScheduledMeal>().ToTable("ScheduledMeal");
             builder.Entity<ScheduledRoutine>().ToTable("ScheduledRoutine");
